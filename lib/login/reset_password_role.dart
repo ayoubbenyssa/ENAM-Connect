@@ -215,7 +215,7 @@ class _Reset_PasswordState extends State<Reset_PasswordRole> {
                                     borderRadius: BorderRadius.circular(24.0),
                                     child:  Center(
                                         child: Image.asset(
-                                          "assets/images/logo.png",
+                                          "assets/images/enam.png",
                                           height: MediaQuery.of(context).size.height * 0.13,
                                           fit: BoxFit.cover,
                                         ))),
