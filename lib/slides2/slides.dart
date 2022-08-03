@@ -233,9 +233,9 @@ class _MyHomePageState extends State<Homeslides> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 400.h,
+                    height: 420.h,
                     decoration: BoxDecoration(
-                        // gradient: LinearGradient(
+                      // gradient: LinearGradient(
                         //     colors: [
                         //       Fonts.col_app,
                         //       Color(0xff95DCFF),
@@ -251,7 +251,7 @@ class _MyHomePageState extends State<Homeslides> {
                             top: 20.h, right: 16.w, left: 30.w, bottom: 20.h),
                         child: Column(children: [
                           Container(
-                              height: 240.h,
+                              height: 270.h,
                               child: PageView.builder(
                                   controller: _controller,
                                   physics: BouncingScrollPhysics(),

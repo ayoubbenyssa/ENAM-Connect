@@ -172,7 +172,8 @@ class _CChooseRoleState extends State<CChooseRole> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Image.asset(
-                    "assets/images/lgo.png",
+                    // "assets/images/lgo.png",
+                    "assets/images/enam.png" ,
                     width: 80.w,
                   ),
                   Container(
@@ -182,14 +183,22 @@ class _CChooseRoleState extends State<CChooseRole> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        "assets/images/ifd.png",
-                        width: 150.w,
-                        color: Colors.white,
-                      ),
+                      // Image.asset(
+                      //   "assets/images/ifd.png",
+                      //   width: 150.w,
+                      //   color: Colors.white,
+                      // ),
+                      Container(child: Row(
+                        children: [
+                          Text("ENAM ",
+                          style: TextStyle(color: Colors.white  ,fontWeight: FontWeight.bold ,fontSize: 18.sp),),
+                          Text("Connect",
+                            style: TextStyle(color: Colors.white  ,fontWeight: FontWeight.w400 ,fontSize: 18.sp),),
+                        ],
+                      ),),
                       Container(height: 6.h),
                       Text(
-                        "L'application officielle de l'IFD",
+                        "L'application officielle de l'ENAM",
                         style: TextStyle(color: Colors.white, fontSize: 12.sp),
                       ),
                       Container(height: 8.h),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:enamconnect/login/login.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:enamconnect/services/Fonts.dart';
+import 'package:enamconnect/services/Fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen(this.role);
@@ -38,22 +40,34 @@ class _LoginState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
 
-            ClipRRect(
-                borderRadius: BorderRadius.circular(24.0),
-                child:  Center(
-                      child: Image.asset(
-                        "assets/images/logo.png",
-                    height: MediaQuery.of(context).size.height * 0.13,
-                    fit: BoxFit.cover,
-                  ))),
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: Center(
+                          child: Image.asset(
+                            "assets/images/enam.png",
+                            height: MediaQuery.of(context).size.height * 0.13,
+                            fit: BoxFit.cover,
+                          ))),
                   Container(
                     height: 18.h,
                   ),
                   Center(
-                      child: Image.asset(
-                        "assets/images/ifd.png",
-                        width: 180.w,
-                      )),
+                    child:
+                    Container(child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+
+                      children: [
+                        Text("ENAM ",
+                          style: TextStyle(color: Fonts.col_app  ,fontWeight: FontWeight.bold ,fontSize: 20.sp),),
+                        Text("Connect",
+                          style: TextStyle(color: Fonts.col_app  ,fontWeight: FontWeight.w400 ,fontSize: 20.sp),),
+                      ],
+                    ),),
+                    //     Image.asset(
+                    //   "assets/images/ifd.png",
+                    //   width: 180.w,
+                    // )
+                  ),
                   Expanded(child: Login1(_scaffoldKey,role: widget.role,))
                 ])
 

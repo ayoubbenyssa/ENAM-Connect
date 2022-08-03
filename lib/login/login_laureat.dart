@@ -475,7 +475,7 @@ class _LoginLaurState extends State<LoginLaureat> {
                             borderRadius: BorderRadius.circular(24.0),
                             child: Center(
                                 child: Image.asset(
-                              "assets/images/logo.png",
+                              "assets/images/enam.png",
                               height: MediaQuery.of(context).size.height * 0.13,
                               fit: BoxFit.cover,
                             ))),
@@ -483,10 +483,22 @@ class _LoginLaurState extends State<LoginLaureat> {
                           height: 18.h,
                         ),
                         Center(
-                            child: Image.asset(
-                          "assets/images/ifd.png",
-                          width: 180.w,
-                        )),
+                            child:
+                            Container(child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+                                Text("ENAM ",
+                                  style: TextStyle(color: Fonts.col_app  ,fontWeight: FontWeight.bold ,fontSize: 20.sp),),
+                                Text("Connect",
+                                  style: TextStyle(color: Fonts.col_app  ,fontWeight: FontWeight.w400 ,fontSize: 20.sp),),
+                              ],
+                            ),),
+                        //     Image.asset(
+                        //   "assets/images/ifd.png",
+                        //   width: 180.w,
+                        // )
+                        ),
                         new Container(height: 24.0.h),
                         email,
                         new Container(height: 12.0),
