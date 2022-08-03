@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1038104675252",
+    "project_id": "enam-connect",
+    "storage_bucket": "enam-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038104675252:android:30be49901d73329638e8e1",
+        "android_client_info": {
+          "package_name": "com.linkommunity.enam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038104675252-qrjf21gpif20upbj3f8tiok6ri584ol9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFyRNBbZC3x4PAfK_-KayQqYHuF3Pye5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038104675252-qrjf21gpif20upbj3f8tiok6ri584ol9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
