@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enamconnect/config/config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+
 
 import 'package:enamconnect/services/Fonts.dart';
 
@@ -43,7 +45,7 @@ class _Notes_RattState extends State<Notes_Ratt> {
     print(json.encode(param));
 
     final batchData = await http.post(
-      "${Config.url_api}/save_scores",
+      "${Config.url_api_scole}/save_scores",
       headers: {
         'Content-Type': 'application/json',
       },
@@ -69,7 +71,7 @@ class _Notes_RattState extends State<Notes_Ratt> {
     };
 
     final batchData = await http.post(
-      "${Config.url_api}/publish_exam_scores",
+      "${Config.url_api_scole}/publish_exam_scores",
       headers: {
         'Content-Type': 'application/json',
       },
@@ -91,7 +93,7 @@ class _Notes_RattState extends State<Notes_Ratt> {
     };
 
     final batchData = await http.post(
-      "${Config.url_api}/employee_subject_marks_ar",
+      "${Config.url_api_scole}/employee_subject_marks_ar",
       body: param,
     );
     List controllers2 = [];
@@ -127,25 +129,16 @@ class _Notes_RattState extends State<Notes_Ratt> {
 
   Widget _buildNotesItem(BuildContext context, int index) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.w),
-
-        decoration: BoxDecoration(
-          color: Fonts.col_cl,
-          borderRadius: BorderRadius.all(Radius.circular(25.r)),
-          border: Border.all(
-              color: Fonts.border_col, style: BorderStyle.solid, width: 0.1),
-        ),
-
+      decoration: BoxDecoration(
+          border:
+              Border(bottom: BorderSide(style: BorderStyle.solid, width: 0.1))),
       child: ListTile(
-        title: Text("${data["student"][index]["student"]}",
-          style: TextStyle(
-              color: Fonts.col_app_grey,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold),
-        ),
+        title: Text("${data["student"][index]["student"]}", style: TextStyle(fontWeight: FontWeight.normal ,color: Fonts.col_text , fontSize: 14.sp),),
         trailing: Container(
-          width: 70.w,
-
+          width: 40.w,
+          padding: EdgeInsets.all(5),
+          decoration:
+              BoxDecoration(shape: BoxShape.circle, color: Fonts.col_app),
           child: widget.chef_dept == true
               ? TextFormField(
                   keyboardType: TextInputType.number,
@@ -165,7 +158,7 @@ class _Notes_RattState extends State<Notes_Ratt> {
                   },
                   controller: controllers[index],
                   // focusNode: FocusNode(),
-                  style: TextStyle(fontSize: 15.0.sp, color: Fonts.col_app_fon,fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 14.0.sp, color: Colors.white),
                   decoration: InputDecoration(border: InputBorder.none),
                   // keyboardType: TextInputType.multiline,
                   // maxLines: null,
@@ -189,7 +182,7 @@ class _Notes_RattState extends State<Notes_Ratt> {
                     },
                     controller: controllers[index],
                     // focusNode: FocusNode(),
-                    style: TextStyle(fontSize: 15.0.sp, color: Fonts.col_app_fon,fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 14.0.sp, color: Colors.white),
                     decoration: InputDecoration(border: InputBorder.none),
                     // keyboardType: TextInputType.multiline,
                     // maxLines: null,
@@ -217,8 +210,9 @@ class _Notes_RattState extends State<Notes_Ratt> {
   Widget build(BuildContext context) {
     return data != null
         ? Scaffold(
-            bottomNavigationBar: widget.chef_dept == true
-                ? Container(
+            bottomNavigationBar:
+            widget.chef_dept == true ?
+            Container(
                     height: 54,
                     margin: EdgeInsets.all(12),
                     child: Row(
@@ -268,15 +262,15 @@ class _Notes_RattState extends State<Notes_Ratt> {
                       ],
                     ),
                   )
-                : Container(height: 1),
+                : Container(height: 1) ,
+                // : Container(height: 1),
             body: Column(
               children: <Widget>[
                 Expanded(
-                  child: Container(color: Colors.white,child: _buildNotesList()),
+                  child: _buildNotesList(),
                 )
               ],
-            )
-    )
+            ))
         : Center(child: CircularProgressIndicator());
   }
 }

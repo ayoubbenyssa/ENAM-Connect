@@ -1,6 +1,5 @@
 
 class Config {
-
-  static String url_api = "http://ifd-erp.tk/api";
+  static String url_api_scole = "http://ena-erp.tk/api";
 
 }

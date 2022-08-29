@@ -128,7 +128,7 @@ class Item1 extends StatelessWidget {
           click();
         },
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(12.0.r),
+            borderRadius: BorderRadius.circular(28.0.r),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.3.w,
               //  decoration: Widgets.boxdecoration_container3(),
@@ -142,27 +142,28 @@ class Item1 extends StatelessWidget {
                 //     image: new AssetImage("assets/images/logo.png")),
                 border: new Border.all(
                     color: Fonts.border_col.withOpacity(0.5), width: 1.0),
-                boxShadow: [
-                  BoxShadow(
-                      color: Fonts.col_grey.withOpacity(0.3), blurRadius: 4.0)
-                ],
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [
-                      0.3,
-                      1
-                    ],
-                    colors: [
-                      Color(0xff92BA92),
-                      Color(0xff92BA92).withOpacity(0.44),
-                    ]),
+                color: Color(0xff92BA92),
+                // boxShadow: [
+                //   BoxShadow(
+                //       color: Fonts.col_grey.withOpacity(0.3), blurRadius: 4.0)
+                // ],
+                // gradient: LinearGradient(
+                //     begin: Alignment.topLeft,
+                //     end: Alignment.bottomRight,
+                //     stops: [
+                //       0.3,
+                //       1
+                //     ],
+                //     colors: [
+                //       Color(0xff92BA92),
+                //       Color(0xff92BA92).withOpacity(0.44),
+                //     ]),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(height: 20.w),
+                  Container(height: 15.w),
 
                   SvgPicture.asset(
                     image,

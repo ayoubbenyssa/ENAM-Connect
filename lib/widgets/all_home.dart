@@ -98,7 +98,7 @@ class _AllHomeState extends State<AllHome> {
     prefs = await SharedPreferences.getInstance();
 
     final loginData = await http.post(
-      "${Config.url_api}/login",
+      "${Config.url_api_scole}/login",
       body: param,
     );
 
@@ -193,7 +193,7 @@ class _AllHomeState extends State<AllHome> {
         ];
         categories = all_cat.map((e) => CategoryPreview.fromMap(e)).toList();
       });
-      if (widget.user.role.id != "9UHbnUrotk") verify_login_campus();
+      if (widget.user.role.id != "twAD2BVIbK") verify_login_campus();
       getVideos();
       getGalleries();
       getnews();
@@ -288,13 +288,11 @@ class _AllHomeState extends State<AllHome> {
               : NewsSlides(widget.user, widget.lat, widget.lng, news);
         case 'banner1':
           return Column(children: [
-            (loadin &&
-                    widget.user.role.id != "9UHbnUrotk" &&
-                    widget.user.role.id != "rZWnnQTWIr")
+            (loadin && widget.user.role.id != "twAD2BVIbK" && widget.user.role.id != "5MzDneecxZ")
                 ? Center(child: Widgets.load())
                 : Container(),
             etud_prof == "Étudiant" ? SliderBanner2(widget.user) : Container(),
-            (widget.user.role.id == "NXiGscrffB" && etud_prof == "Professeur")
+            (widget.user.role.id == "FUl86lV0Z3" && etud_prof == "Professeur")
                 ? SliderBanner2Prof(widget.user, chef_dept)
                 : Container()
           ]);

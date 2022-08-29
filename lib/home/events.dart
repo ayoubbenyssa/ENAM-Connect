@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:enamconnect/models/user.dart';
 import 'package:enamconnect/parc_events_stream/parc_events_stream.dart';
@@ -59,6 +60,10 @@ class _ParcState extends State<Events> with SingleTickerProviderStateMixin {
       _menuShown = false;
     });
   }
+  Widget bottom_appbar (){
+    PreferredSize(child: Container(),);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,77 +80,73 @@ class _ParcState extends State<Events> with SingleTickerProviderStateMixin {
         length: 2,
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.white),
+            appBar: PreferredSize(
+        preferredSize: new Size.fromHeight(128.h),
 
-            elevation: 0.0,
-            titleSpacing: 0.0,
-            toolbarHeight: 60.h ,
-            leading: Container(
-              color: Fonts.col_app,
-              child: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            title: Container(
-              padding: const EdgeInsets.only(top: 10,bottom:10),
-              color: Fonts.col_app,
-              child: Row(
-                children: [
-                  Image.asset(
-                    "images/cal.png",
-                    color: Colors.white,
-                    width: 23.5.w,
-                    height: 25.5.h,
-                  ),              Container(width: 7.w,),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10,bottom:10),
-                    child: Text(
-                      "Evénements",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 18.0.sp),
-                    ),
-                  ),
+        child: ApBar("assets/images/ABCENCE.svg","images/cal.png" ,"Evénements" , bottom_appbar() )),
 
-                  Expanded(child: Container()),
-                  Padding(
-                      padding: EdgeInsets.all(8.w),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                          child: Container(
-                              height: 44.w,
-                              width: 44.w,
-                              color: Colors.white.withOpacity(0.9),
-                              padding: EdgeInsets.all(0.w),
-                              child: Image.asset(
-                                "images/enam.png",
-                              )))),
-                  SizedBox(width: 22.w,),
-                ],
-
-              ),
-            ),
-          ),
+          // AppBar(
+          //   iconTheme: IconThemeData(color: Colors.white),
+          //
+          //   elevation: 0.0,
+          //   titleSpacing: 0.0,
+          //   toolbarHeight: 60.h ,
+          //   leading: Container(
+          //     color: Fonts.col_app,
+          //     child: IconButton(
+          //       icon: Icon(
+          //         Icons.arrow_back,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {
+          //         Navigator.pop(context);
+          //       },
+          //     ),
+          //   ),
+          //   title: Container(
+          //     padding: const EdgeInsets.only(top: 10,bottom:10),
+          //     color: Fonts.col_app,
+          //     child: Row(
+          //       children: [
+          //         Image.asset(
+          //           "images/cal.png",
+          //           color: Colors.white,
+          //           width: 23.5.w,
+          //           height: 25.5.h,
+          //         ),              Container(width: 7.w,),
+          //         Padding(
+          //           padding: const EdgeInsets.only(top: 10,bottom:10),
+          //           child: Text(
+          //             "Evénements",
+          //             style: TextStyle(
+          //                 color: Colors.white,
+          //                 fontWeight: FontWeight.w100,
+          //                 fontSize: 18.0.sp),
+          //           ),
+          //         ),
+          //
+          //         Expanded(child: Container()),
+          //         Padding(
+          //             padding: EdgeInsets.all(8.w),
+          //             child: ClipRRect(
+          //                 borderRadius: BorderRadius.all(Radius.circular(10.r)),
+          //                 child: Container(
+          //                     height: 44.w,
+          //                     width: 44.w,
+          //                     color: Colors.white.withOpacity(0.9),
+          //                     padding: EdgeInsets.all(0.w),
+          //                     child: Image.asset(
+          //                       "images/enam.png",
+          //                     )))),
+          //         SizedBox(width: 22.w,),
+          //       ],
+          //
+          //     ),
+          //   ),
+          // ),
           body:
             new StreamParcPub(
-              PreferredSize(
-                  child: Container(
-                      height: 20.h,
-                      color: Fonts.col_app,
-                      padding: EdgeInsets.all(0),
-                      margin: EdgeInsets.all(0),
-                      child :  ClipRRect(
-                        borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-                        child: Container(color: Colors.white,height: 20,),
-                      ))),
+              PreferredSize(child: Container(),),
 
               widget.lat,
               widget.lng,

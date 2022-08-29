@@ -26,7 +26,7 @@ class SousModule extends StatelessWidget {
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: 20.0, fontFamily: 'Helvetica')))),
+                                  fontSize: 20.0, fontFamily: 'Margarine')))),
                 ],
               )),
           Container(

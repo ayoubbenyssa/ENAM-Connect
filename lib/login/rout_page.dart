@@ -78,8 +78,8 @@ class _RootPageState extends State<RootPage> {
         state = -1;
       });
     } else {
-      var response = await parse_s
-          .getparse('users?where={"id1":"$id"}&include=user_formations,role');
+      print("idd ===== $id");
+      var response = await parse_s.getparse('users?where={"id1":"$id"}&include=user_formations,role');
 
 
 
@@ -91,6 +91,10 @@ class _RootPageState extends State<RootPage> {
         });
       else
         print("@@@");
+      print("--------------------");
+      print(response);
+      print("--------------------");
+
       setState(() {
         connect = true;
         user_me = new User.fromMap(response["results"][0]);

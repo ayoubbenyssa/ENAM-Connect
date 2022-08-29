@@ -27,7 +27,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
  # google_sign_in: 4.5.1
   firebase_storage: 3.1.6
@@ -151,3 +150,12 @@ flutter:
     - family: Helvetica_neu
       fonts:
         - asset: assets/fonts/Helvetica Neue Medium Extended.otf
+#    - family:
+#        - asset: assets/fonts/Comfortaa-VariableFont_wght.ttf
+#        - asset: assets/fonts/Comfortaa-SemiBold.ttf
+#        - asset: assets/fonts/Comfortaa-Regular.ttf
+#        - asset: assets/fonts/Comfortaa-Bold.ttf
+#        - asset: assets/fonts/Comfortaa-Medium.ttf
+#        - asset: assets/fonts/Comfortaa-Light.ttf
+#        - asset: assets/fonts/Comfortaa-Medium.ttf
+#        - asset: assets/fonts/Comfortaa-Bold.ttf

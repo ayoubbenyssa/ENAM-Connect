@@ -30,7 +30,7 @@ class _AllReservationState extends State<AllMyReservation> {
     };
 
     final reservationsData = await http.post(
-      "${Config.url_api}/all_reservations",
+      "${Config.url_api_scole}/all_reservations",
       body: param,
     );
     setState(() {
@@ -50,7 +50,7 @@ class _AllReservationState extends State<AllMyReservation> {
     };
 
     final reservationsData = await http.post(
-      "${Config.url_api}/make_cancellation",
+      "${Config.url_api_scole}/make_cancellation",
       body: param,
     );
     setState(() {

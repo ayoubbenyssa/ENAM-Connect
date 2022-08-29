@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,18 +80,11 @@ class _AddAbsenceState extends State<AddAbsence> {
       setState(() {
         load = true;
       });
-
-      print("*************");
-      print(params["params"]);
-
-      print("*************");
-
       home_repos.add_absence(params["params"]);
       setState(() {
         load = false;
-         params = null ;
       });
-      // Navigator.pop(context);
+      Navigator.pop(context);
       //params
 
       /*  final pair = await e2ee.X25519().generateKeyPair();
@@ -137,63 +131,132 @@ class _AddAbsenceState extends State<AddAbsence> {
       initialDate: date,
       firstDate: DateTime(DateTime.now().year - 1),
       lastDate: DateTime(DateTime.now().year + 1),
-      borderRadius: 16,
-      theme: ThemeData(primaryColor: Fonts.col_app),
+      borderRadius: 33.r,
+      fontFamily: "Montserrat-Regular",
+      theme: ThemeData(primaryColor: Fonts.col_app,
+        textTheme: TextTheme(
+        body1: TextStyle(color: Color(0xff939393),fontWeight: FontWeight.normal ,fontSize: 15.sp,fontFamily: "Montserrat-Regular"),
+        caption: TextStyle(color: Color(0xff939393),fontWeight: FontWeight.bold ,fontSize: 15.sp,fontFamily: "Helvetica Neue"),
+      ),
+        disabledColor: Colors.yellow,
+        accentTextTheme: TextTheme(
+          body2 : TextStyle(color: Colors.white),
+        ),),
+        textPositiveButton: "Accepte",
+        textNegativeButton: "Annuler ",
+        styleDatePicker: MaterialRoundedDatePickerStyle(
+          paddingDatePicker: EdgeInsets.all(0),
+          paddingMonthHeader: EdgeInsets.all(20),
+          marginLeftArrowPrevious: 5,
+          marginTopArrowPrevious: 5,
+          marginTopArrowNext: 5,
+          marginRightArrowNext: 5,
+          backgroundHeaderMonth: Colors.white,
+          backgroundActionBar : Fonts.col_app.withOpacity(0.2),
+          sizeArrow: 30.r,
+          colorArrowNext: Color(0xff939393),
+          colorArrowPrevious: Color(0xff939393),
+          textStyleMonthYearHeader: TextStyle(fontSize: 15.sp,
+              color: Color(0xff939393),fontWeight: FontWeight.bold,fontFamily: "Montserrat-SemiBold"
+          ) ,
+          textStyleButtonNegative: TextStyle(fontSize: 15.sp, color: Color(0xff939393),fontWeight: FontWeight.bold),
+            textStyleButtonPositive: TextStyle(fontSize: 15.sp, color: Color(0xff92BA92),fontWeight: FontWeight.bold),
+            textStyleDayButton : TextStyle(fontSize: 25.sp,
+                color: Colors.white,fontWeight: FontWeight.bold,fontFamily: "Montserrat-SemiBold"
+            ) ,
+          textStyleYearButton: TextStyle(fontSize: 20.sp,
+            // color: Color(0xff939393),
+            color: Colors.white,fontWeight: FontWeight.bold,fontFamily: "Montserrat-SemiBold"),
+
+          textStyleDayHeader: TextStyle(
+            fontSize: 15.sp,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff939393),
+          ),
+        ),
+        height: 440.h,
+        builderDay: (DateTime dateTime, bool isCurrentDay, bool isSelected, TextStyle defaultTextStyle) {
+          if (isSelected) {
+            return Container(
+              // height: 15.h,
+              // padding: EdgeInsets.all(0),
+              decoration: BoxDecoration(color: Color(0xff92BA92),
+                  // borderRadius: BorderRadius.all(Radius.circular(4.r)),
+                  shape: BoxShape.circle
+                  // shape: BoxShape.rectangle
+              ),
+              child: Center(
+                child: Text(
+                  dateTime.day.toString(),
+                  style: defaultTextStyle,
+                ),
+              ),
+            );
+          }
+      }
     );
 
     if (!this.mounted) return;
-
     setState(() {
       date = newDateTime;
     });
     print(newDateTime.toString());
   }
 
-  row(a,b)=>  Column(
-    children: [
-      SizedBox(height: 10.h,),
+  row(a,b)=>  Container(
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.29,
+              child: Row(
 
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(a,style:
-          TextStyle(fontWeight: FontWeight.w100,fontSize: 15.sp,color: Fonts.col_app_grey),
-          ),
-          Expanded(
-            child: Container(),
-          ),
-         a == "matiéres" ?Container(
-           width: MediaQuery.of(context).size.width * 0.6.w ,
-           child: Text(b,maxLines: 1,style:
-         TextStyle(fontWeight: FontWeight.bold,fontSize: 15.sp,color: Fonts.col_app_grey),
-         ),) : Text(b,maxLines: 1,style:
-          TextStyle(fontWeight: FontWeight.bold,fontSize: 15.sp,color: Fonts.col_app_grey),
-            )
-        ],
-      ),
-      SizedBox(height: 10.h,),
-      a !='periode' ?  Divider(color: Fonts.col_app_grey,thickness: 0.5,height: 0.5,) : Container(),
+                children: [
+                  Text(a,
+                    style:  TextStyle(fontWeight: FontWeight.w400 ,fontSize: 15.sp ,color: Fonts.col_app_grey),),
+                  Expanded(child: Container()),
+                  Text(" :  ",
+                    style:  TextStyle(fontWeight: FontWeight.w400 ,fontSize: 15.sp ,color: Fonts.col_app_grey),),
+                ],
+              ),
+            ),
+            // Expanded(
+            //   child: Container(),
+            // ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.54,
+              child: Text(b,
+                style:  TextStyle(fontWeight: FontWeight.bold ,fontSize: 15.sp ,color: Color(0xffA4B2CC)),),
+            ),
+          ],
+        ),
+            SizedBox(height: 10.h,),
+        a !=  "Heure " ? Divider(color: Fonts.border_col,height: 0.5.h,) : Container(),
+        a !=  "Heure " ? SizedBox(height: 10.h,) : Container(),
 
-
-    ],
+      ],
+    ),
   );
   Widget recap() {
-    String time =   params["details"].map((a)=> a.time).toList().toString();
+  String time =   params["details"].map((a)=> a.time).toList().toString();
     return Card(
+      elevation: 0.0,
         color: Fonts.col_cl ,
         shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0.r)),
-    child: Container(
-          decoration: BoxDecoration(
-            color: Fonts.col_cl ,
-            border: Border.all(color: Fonts.col_app,width: 0.5.w),
-            borderRadius: BorderRadius.all(Radius.circular(18.r))
-          ),
+            borderRadius: BorderRadius.circular(18.0.r)),
+        child: Container(
+            decoration: BoxDecoration(
+                color: Fonts.col_cl ,
+                border: Border.all(color: Fonts.col_app,width: 0.5.w),
+                borderRadius: BorderRadius.all(Radius.circular(18.r))
+            ),
             padding: EdgeInsets.all(12),
             child: Column(
               children: [
-                Text("Récapitulatif",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp,color: Fonts.col_app_fonn),),
+                Text("Récapitulatif ",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp , color: Fonts.col_text),),
                 SizedBox(height: 30.h,),
                 row("Nom complet ", params["student"].first_name.toString()),
                 Container(height: 8,),
@@ -201,21 +264,7 @@ class _AddAbsenceState extends State<AddAbsence> {
                 Container(height: 8,),
                 row("Date ", new DateFormat('dd/MM/yyyy').format(date)),
                 Container(height: 8,),
-                // row("Heure ", time),
-                row("raison", params["params"]["raison"].toString()),
-                row("seance", params["params"]["seance"].toString()),
-                row("matiéres", params["nom_matieres"].toString()),
-
-                row("Type d'absonce", params["params"]["type_abs"].toString() == "1" ? "Absence" : "Retard"),
-
-
-                row("periode", params["params"]["periode"]['forenoon'] == true ? "matinee" +  ( (  params["params"]["periode"]['afternoon'] ) ? " et  apres-midi " : " ")
-                :
-                (  params["params"]["periode"]['afternoon'] ) ?
-                " apres-midi " : " "
-                ),
-
-
+                row("Heure ", time),
 
 
               ],
@@ -228,8 +277,7 @@ class _AddAbsenceState extends State<AddAbsence> {
         MaterialPageRoute(
           builder: (context) =>
               StudentsListOneChoice(widget.currentUser, classe.batch_id, date),
-        )
-    );
+        ));
 
     if (servs != null) print(servs);
 
@@ -264,7 +312,7 @@ class _AddAbsenceState extends State<AddAbsence> {
           // height: 52.h,
             padding: EdgeInsets.only(top: 4.h, bottom: 4.h),
             decoration: BoxDecoration(
-              color: Fonts.col_cl,
+              color: Colors.white,
               border: Border.all(
                 color: Fonts.col_app,
                 width: 0.5.w,
@@ -289,11 +337,11 @@ class _AddAbsenceState extends State<AddAbsence> {
               classe == null
                   ? Container()
                   : Container(alignment: Alignment.centerRight, width: MediaQuery.of(context).size.width * 0.39.w ,
-                    child: Text(classe.name,maxLines: 1,
+                child: Text(classe.name,maxLines: 1,
                     style:
                     TextStyle(fontWeight: FontWeight.w100,fontSize: 13.sp,color: Fonts.col_app_fon)
-                    ),
-                  ),
+                ),
+              ),
               Container(width: 12.w),
               Container(
                 height: 40.h,
@@ -324,7 +372,7 @@ class _AddAbsenceState extends State<AddAbsence> {
           // height: 52.h,
             padding: EdgeInsets.only(top: 4.h, bottom: 4.h),
             decoration: BoxDecoration(
-              color: Fonts.col_cl,
+              color: Colors.white,
               border: Border.all(
                 color: Fonts.col_app,
                 width: 0.5.w,
@@ -366,7 +414,7 @@ class _AddAbsenceState extends State<AddAbsence> {
           // height: 52.h,
             padding: EdgeInsets.only(top: 4.h, bottom: 4.h),
             decoration: BoxDecoration(
-              color: Fonts.col_cl,
+              color: Colors.white,
               border: Border.all(
                 color: Fonts.col_app,
                 width: 0.5.w,
@@ -390,12 +438,12 @@ class _AddAbsenceState extends State<AddAbsence> {
               Expanded(child: Container()),
               Text(new DateFormat('dd/MM/yyyy').format(date),
                   style:
-                  TextStyle(fontWeight: FontWeight.w100,fontSize: 13.sp,color: Fonts.col_text)
+                  TextStyle(fontWeight: FontWeight.w100,fontSize: 13.sp,color: Fonts.col_app_fon)
               ),
               Container(width: 12.w),
               Container(
-                  height: 40.h,
-                  width: 40.w,
+                height: 40.h,
+                width: 40.w,
                 child: Icon(Icons.arrow_right,size: 35.r,color: Fonts.col_text,),
               ),
               Container(
@@ -417,175 +465,86 @@ class _AddAbsenceState extends State<AddAbsence> {
         'application/vnd.ms-powerpoint application/vnd.openxmlformats-officedocument.presentationml.presentation'
         ' application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.openxmlformats-officedocument.wordprocessingml.template
      */
-
+    Widget  boton_appbar(){
+      PreferredSize(preferredSize : Size.fromHeight(0.h));
+    }
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.white),
-          toolbarHeight: 60.h ,
-          elevation: 0.0,
-
-          // iconTheme: IconThemeData(color: Fonts.col_app),
-          // titleSpacing: double.infinity,
-          titleSpacing: 0,
-          leading: Container(
-            color: Fonts.col_app,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          title: Container(
-            padding: const EdgeInsets.only(top: 10,bottom:10),
-            color: Fonts.col_app,
-            child: Row(
-              children: [
-                Image.asset(
-                  "images/appointment.png",
-                  color: Colors.white,
-                  width: 23.5.w,
-                  height: 25.5.h,
-                ), Container(width: 7.w,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom:10),
-                  child: Text(
-                    "Ajouter une absence",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18.0.sp),
-                  ),
-                ),
-                Expanded(child: Container()),
-                Padding(
-                    padding: EdgeInsets.all(8.w),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                        child: Container(
-                            height: 44.w,
-                            width: 44.w,
-                            color: Colors.white.withOpacity(0.9),
-                            padding: EdgeInsets.all(0.w),
-                            child: Image.asset(
-                              "images/enam.png",
-                            )))),
-                SizedBox(width: 22.w,),
-              ],
-
-            ),
-          ),
-        ),
+        appBar: PreferredSize(
+    preferredSize : Size.fromHeight(128.h),
+    child: ApBar("assets/images/ABCENCE.svg" ,"images/absences.png", "Ajouter une absence" ,boton_appbar())),
         body: Container(
-          color: Fonts.col_app,
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-            child: Container(
-                color: Colors.white,
-                child: ListView(padding: EdgeInsets.all(8), children: [
-                  new Form(
-                      key: _formKey,
-                      autovalidate: _autovalidate,
-                      child: new Container(
-                          padding: new EdgeInsets.all(8.0),
-                          child: new Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  height: 40.h,
-                                ),
-                                debut,
+            child: ListView(padding: EdgeInsets.all(8), children: [
+          new Form(
+              key: _formKey,
+              autovalidate: _autovalidate,
+              child: new Container(
+                  padding: new EdgeInsets.all(8.0),
+                  child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          height: 12,
+                        ),
+                        debut,
 
-                                new Container(height: 30.0.h),
-                                classe_widget,
-                                new Container(height: 30.0.h),
+                        new Container(height: 12.0),
+                        classe_widget,
+                        new Container(height: 12.0),
 
-                                choose_students,
-                                new Container(height: 30.0.h),
+                        choose_students,
+                        new Container(height: 12.0),
 
-                                // DropDownClasse(choose_type_classe),
-                                new Container(
-                                  height: 15.0.h,
-                                ),
-                                params == null ? Container() : recap(),
-                                Container(
-                                  height: 12.h,
-                                ),
-                                Center(
-                                  child: Container(
-                                      padding: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 1.h, top: 1.h),
-                                      width: 200.w,
-                                      height: 40.h,
-                                      // margin: EdgeInsets.symmetric(horizontal: 50.w ),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(Radius.circular(22.r))
-                                      ),
+                        // DropDownClasse(choose_type_classe),
+                        new Container(
+                          height: 12.0,
+                        ),
+                        params == null ? Container() : recap(),
+                        Container(
+                          height: 12.h,
+                        ),
+                        Center(
+                          child: Container(
+                              padding: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 1.h, top: 1.h),
+                              width: 200.w,
+                              height: 40.h,
+                              // margin: EdgeInsets.symmetric(horizontal: 50.w ),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(22.r))
+                              ),
 
-                                      child: RaisedButton(
-                                        color:
-                                         Fonts.col_app,
-                                        elevation: 0,
-                                        shape: new RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(22.r),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          print("_--------------------------------____ 1") ;
-                                          print("confirmation abs");
-                                          add_post();                                        print("_--------------------------------____ 2") ;
-
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Confirmer",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                  fontSize: 20.sp,
-                                                  color: Colors.white
-                                            ),)
-                                          ],
-                                        ),
-                                      )
+                              child: RaisedButton(
+                                color:
+                                Fonts.col_app,
+                                elevation: 0,
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(22.r),
                                   ),
                                 ),
-                                // ClipRRect(
-                                //   borderRadius: BorderRadius.all(Radius.circular(22.r)),
-                                //
-                                //   child: Container(
-                                //     decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.all(Radius.circular(22.r)),
-                                //
-                                //     ),
-                                //
-                                //     margin: EdgeInsets.symmetric(horizontal: 100.w),
-                                //     child: PrimaryButton(
-                                //       disabledColor: Fonts.col_grey,
-                                //       fonsize: 17.5.sp,
-                                //       icon: "",
-                                //       textStyle: TextStyle(fontWeight: FontWeight.w100,color: Colors.white),
-                                //       prefix: Container(),
-                                //       color: Fonts.col_app,
-                                //       text: "CONFIRMER",
-                                //       isLoading: load,
-                                //       onTap: () {
-                                //         print("confirmation abs");
-                                //         add_post();
-                                //       },
-                                //     ),
-                                //   ),
-                                // )
-                              ]))),
-                ])),
-          ),
-        ));
+                                onPressed: () {
+                                  print("_--------------------------------____ 1") ;
+                                  print("confirmation abs");
+                                  add_post();                                        print("_--------------------------------____ 2") ;
+
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Confirmer",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w100,
+                                          fontSize: 18.sp,
+                                          color: Colors.white
+                                      ),)
+                                  ],
+                                ),
+                              )
+                          ),
+                        ),
+                      ]))),
+        ])));
   }
 }

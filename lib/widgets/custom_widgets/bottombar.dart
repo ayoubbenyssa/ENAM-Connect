@@ -52,7 +52,7 @@ class _BottomNavigationDotBarState extends State<BottomNavigationDotBar> {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.only(top: 8.w, bottom: 8.w, left: 24.w, right: 24.w),
+        padding: EdgeInsets.only(top: 8.w, bottom: 8.w, left: 55.w, right: 55.w),
         //margin: EdgeInsets.symmetric(horizontal: 16.w),
         child:  Container(
 
@@ -63,16 +63,17 @@ class _BottomNavigationDotBarState extends State<BottomNavigationDotBar> {
 
                   Center(
                     child: Container(
-                      height: 50.h,
+                      height: 52.h,
                       padding: EdgeInsets.symmetric(horizontal: 16.w ),
                       decoration: BoxDecoration(
                           border: new Border.all(
                               color: Fonts.col_grey.withOpacity(0.4), width: 1.2),
                           borderRadius: BorderRadius.circular(62.r),
-                          color: Color(0xffA8BEA8)),                    child: Padding(
-                        padding: EdgeInsets.only(bottom: 4.h, top: 4.h),
+                          color: Color(0xffe6ebe6)
+                      ),
+                      child: Padding(padding: EdgeInsets.only(bottom: 4.h, top: 4.h),
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: _createNavigationIconButtonList(
                                 widget.items.asMap())),
@@ -224,24 +225,27 @@ class _NavigationIconButtonState extends State<_NavigationIconButton>
               child: AnimatedOpacity(
                   opacity: _opacityIcon,
                   duration: Duration(milliseconds: 200),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(widget._icon,
-                          width: 30.w,
-                         height: 30.h,
-                          fit: BoxFit.contain,
-                          color: widget._colorIcon),
-                      // Container(height: 4.h),
-                      // Text(widget._name,
-                      //     style: TextStyle(
-                      //         color: widget._colorIcon,
-                      //         fontSize: 13.0.sp,
-                      //         fontWeight: FontWeight.w600)),
-                      /* Container(height: 4.h),
-                  Container(
-                      width: 32.w, height: 3.5.h, color: widget._colorIcon),*/
-                    ],
+                  child: Container(
+                    padding: EdgeInsets.only(right: widget._name == "Networking" ? 90.w : widget._name == "Profil" ? 5.w : 15.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(widget._icon,
+                            width: 31.w,
+                           height: 31.h,
+                            fit: BoxFit.contain,
+                            color: widget._colorIcon),
+                        // Container(height: 4.h),
+                        // Text(widget._name,
+                        //     style: TextStyle(
+                        //         color: widget._colorIcon,
+                        //         fontSize: 13.0.sp,
+                        //         fontWeight: FontWeight.w600)),
+                        /* Container(height: 4.h),
+                    Container(
+                        width: 32.w, height: 3.5.h, color: widget._colorIcon),*/
+                      ],
+                    ),
                   ))));
 }

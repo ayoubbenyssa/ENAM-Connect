@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
@@ -761,23 +762,24 @@ class _AddAnnonceState extends State<AddAnnonce> {
     );
 
     Widget drop_down = new Container(
-        color: Fonts.col_app,
-        height: 60.0.h,
+        color: Colors.white,
+        height: 70.0.h,
         child: Container(
             margin: const EdgeInsets.all(8.0),
             padding: const EdgeInsets.only(left: 16.0, right: 8.0),
             decoration: new BoxDecoration(
-              color: Fonts.col_app,
-              border: new Border.all(color: Colors.white, width: 1.0),
-              borderRadius: new BorderRadius.circular(10.0.r),
+              color: Fonts.col_cl,
+              border: new Border.all(color: Fonts.col_text, width: 1.0),
+              borderRadius: new BorderRadius.circular(22.0.r),
             ),
             child: new FixDropDown(
-              elevation: 1,
+              elevation: 0,
                 style: TextStyle(color: Colors.black),
                 iconSize: 32.0,
                 isDense: false,
                 items: _list.map((String value) {
                   return new FixDropdownMenuItem(
+
                     value: value,
                     child: new Text(
                       value,
@@ -792,7 +794,7 @@ class _AddAnnonceState extends State<AddAnnonce> {
                       : "Type d'annonces",
                   maxLines: 1,
                   softWrap: true,
-                  style: new TextStyle(color: Colors.white),
+                  style: new TextStyle(color: Fonts.col_text),
                 ),
                 onChanged: (String value) {
                   setState(() {
@@ -831,6 +833,10 @@ class _AddAnnonceState extends State<AddAnnonce> {
       null,
       suffixIcon: "",
     );
+
+    Widget  boton_appbar(){
+      PreferredSize(preferredSize : Size.fromHeight(0.h));
+    }
     // Widgets.textfield_des(
     //         "Descriprion",
     //     _descfocus,
@@ -865,37 +871,43 @@ class _AddAnnonceState extends State<AddAnnonce> {
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.white,
-        appBar: new AppBar(
-
-          iconTheme: IconThemeData(color: Colors.white),
-
-          title: new Text(widget.an.toString() != "null"
+        appBar: PreferredSize(
+          preferredSize : Size.fromHeight(128.h),
+          child: ApBar("assets/images/app1.svg" ,"images/ad.png", widget.an.toString() != "null"
               ? "Modifier l'annonce"
-              : "Publier une annonce",
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w100,
-                fontSize: 18.0.sp),
-          ),
-          elevation: 0.0,
-        ),
+              : "Publier une annonce",boton_appbar()),),
+        // appBar: new AppBar(
+        //
+        //   iconTheme: IconThemeData(color: Colors.white),
+        //
+        //   title: new Text(widget.an.toString() != "null"
+        //       ? "Modifier l'annonce"
+        //       : "Publier une annonce",
+        //     style: TextStyle(
+        //         color: Colors.white,
+        //         fontWeight: FontWeight.w100,
+        //         fontSize: 18.0.sp),
+        //   ),
+        //   elevation: 0.0,
+        // ),
         body: new Form(
             key: _formKey,
-            autovalidate: _autovalidate,
+            //autovalidate: _autovalidate,
+            autovalidateMode: _autovalidate as AutovalidateMode,
             //onWillPop: _warnUserAboutInvalidData,
             child: new Column(children: <Widget>[
               drop_down,
 
-              Container(
-                height: 30.h,
-                  color: Fonts.col_app,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-
-                      child: Container(
-                        color: Colors.white,
-            ))
-              ),
+            //   Container(
+            //     height: 30.h,
+            //       color: Fonts.col_app,
+            //       child: ClipRRect(
+            //           // borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
+            //
+            //           child: Container(
+            //             color: Colors.white,
+            // ))
+            //   ),
               Container(
                 // margin: EdgeInsets.symmetric(horizontal: 10.w),
                 child: new Expanded(

@@ -54,7 +54,7 @@
 //     );
 //   }
 //   Future GetListRepas(int user_id, int student_id, int token,) async{
-//     // var url = Uri.parse('${Config.url_api}/meals');
+//     // var url = Uri.parse('${Config.url_api_scole}/meals');
 //     final param = {
 //       "user_id": "$user_id",
 //       "student_id": "$student_id",
@@ -62,7 +62,7 @@
 //     };
 //
 //     final listRepa = await http.post(
-//       "${Config.url_api}/meals",
+//       "${Config.url_api_scole}/meals",
 //       body: param,
 //     );
 //     var responsebody = jsonDecode(listRepa.body);

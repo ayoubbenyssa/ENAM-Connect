@@ -66,7 +66,7 @@ class _MesReservationState extends State<MesReservation> {
     };
 
     final reservationsData = await http.post(
-      "${Config.url_api}/make_cancellation",
+      "${Config.url_api_scole}/make_cancellation",
       body: param,
     );
     setState(() {
@@ -84,7 +84,7 @@ class _MesReservationState extends State<MesReservation> {
     };
 
     final reservationsData = await http.post(
-      "${Config.url_api}/meals",
+      "${Config.url_api_scole}/meals",
       body: param,
     );
     List list = [];
@@ -108,7 +108,7 @@ class _MesReservationState extends State<MesReservation> {
     };
 
     final restoData = await http.post(
-      "${Config.url_api}/make_reservation",
+      "${Config.url_api_scole}/make_reservation",
       body: param,
     );
     setState(() {
@@ -177,7 +177,7 @@ class _MesReservationState extends State<MesReservation> {
     };
 
     final mealsData = await http.post(
-      "${Config.url_api}/all_meals_calendar",
+      "${Config.url_api_scole}/all_meals_calendar",
       body: param,
     );
     setState(() {
@@ -205,7 +205,7 @@ class _MesReservationState extends State<MesReservation> {
     };
 
     final mealsData = await http.post(
-      "${Config.url_api}/all_meals_calendar",
+      "${Config.url_api_scole}/all_meals_calendar",
       body: param,
     );
     if (this.mounted)
@@ -340,7 +340,7 @@ class _MesReservationState extends State<MesReservation> {
     };
 
     final mealsData = await http.post(
-      "${Config.url_api}/all_meals_calendar",
+      "${Config.url_api_scole}/all_meals_calendar",
       body: param,
     );
 

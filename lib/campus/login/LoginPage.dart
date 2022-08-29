@@ -1,4 +1,3 @@
-import 'package:enamconnect/config/config.dart';
 import 'package:enamconnect/models/role.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +9,8 @@ import 'package:enamconnect/services/Fonts.dart';
 import 'package:enamconnect/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'package:enamconnect/config/config.dart';
+
 import 'package:enamconnect/campus/etudiant/home/Accueil.dart';
 import 'package:enamconnect/campus/employee/home/AccueilProf.dart';
 
@@ -93,10 +94,9 @@ class LoginPageState extends State<LoginPage>
       "username": username,
       "password": password,
     };
-    //http://ifd-erp.tk http://ifd-erp.tk
 
     final loginData = await http.post(
-      "${Config.url_api}/login",
+      "${Config.url_api_scole}/login",
       body: param,
     );
 
@@ -183,8 +183,6 @@ class LoginPageState extends State<LoginPage>
                 // color:  const Color(0xffa3bbf1),
                 onPressed: () {
                   print("jjojo");
-                  print("jjojo 222");
-
                   login(_username, _password);
                 },
                 child: new Row(

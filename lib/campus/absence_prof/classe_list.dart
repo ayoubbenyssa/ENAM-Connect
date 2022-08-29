@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,13 +88,13 @@ class _ClassListOneChoiceState extends State<ClassListOneChoice> {
   Widget build(BuildContext context) {
     TextStyle text4(e) => TextStyle(
         color: Colors.black,
-        fontSize: e.check == true ? 20 : 16,
+        fontSize: ScreenUtil().setSp(e.check == true ? 16.sp : 13.sp),
         fontWeight: e.check == true ? FontWeight.w800 : FontWeight.w500);
 
     Widget divid = Container(
       margin: EdgeInsets.only(
-        left: 12,
-        right: 12,
+        left: ScreenUtil().setWidth(12),
+        right: ScreenUtil().setWidth(12),
       ),
       width: MediaQuery.of(context).size.width,
       height: 1,
@@ -107,19 +108,19 @@ class _ClassListOneChoiceState extends State<ClassListOneChoice> {
                 padding: EdgeInsets.only(
                   top: 16,
                   bottom: 16,
-                  left: 23,
-                  right: 23,
+                  left: ScreenUtil().setWidth(23),
+                  right: ScreenUtil().setWidth(23),
                 ),
                 child: Row(children: [
                   Container(
-                    width: 12,
+                    width: ScreenUtil().setWidth(12),
                   ),
                   Expanded(
                       child: Text(
                     e.name,
                     style: text4(e),
                   )),
-                  SvgPicture.asset("images/next.svg"),
+                  SvgPicture.asset("images/next.svg", height: e.check ? 20.h : 17.h , width: e.check ? 18.w : 15.w,),
                 ])),
             divid
           ]),
@@ -152,6 +153,10 @@ class _ClassListOneChoiceState extends State<ClassListOneChoice> {
               fontSize: ScreenUtil().setSp(12.5),
               fontWeight: FontWeight.w400),
         ));
+
+    Widget  boton_appbar(){
+      PreferredSize(preferredSize : Size.fromHeight(0.h));
+    }
 
     return Scaffold(
         bottomNavigationBar: Container(
@@ -192,130 +197,53 @@ class _ClassListOneChoiceState extends State<ClassListOneChoice> {
                 ],
               ),
             )),
-        appBar: AppBar(
-          elevation: 0.0,
-          titleSpacing: 0.0,
-          toolbarHeight: 60.h ,
-          leading: Container(
-            color: Fonts.col_app,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          title: Container(
-            padding: const EdgeInsets.only(top: 10,bottom:10),
-            color: Fonts.col_app,
-            child: Row(
-              children: [
-                Image.asset(
-                  "images/appointment.png",
-                  color: Colors.white,
-                  width: 23.5.w,
-                  height: 25.5.h,
-                ),
-                Container(width: 7.w,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom:10),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.54.w,
-                    child: Text(
-                      "Classe",
-                      maxLines: 2,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.0.sp),
-                    ),
-                  ),
-                ),
-
-                Expanded(child: Container()),
-                Padding(
-                    padding: EdgeInsets.all(8.w),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                        child: Container(
-                            height: 44.w,
-                            width: 44.w,
-                            color: Colors.white.withOpacity(0.9),
-                            padding: EdgeInsets.all(0.w),
-                            child: Image.asset(
-                              "images/enam.png",
-                            )))),
-                SizedBox(width: 22.w,),
-              ],
-
-            ),
-          ),
-        ),
+        appBar: PreferredSize(
+    preferredSize : Size.fromHeight(128.h),
+    child: ApBar("assets/images/ABCENCE.svg" ,"images/absences.png", "Classes" ,boton_appbar())),
         body: load == true
-            ?
-        PreferredSize(
-            child: Container(
-                color: Fonts.col_app,
-                child:  ClipRRect(
-                    borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-                    child: Container(
-                        color: Colors.white,
-        child :Center(
+            ? Center(
                 child: CupertinoActivityIndicator(),
               )
-    ))))
-            :
-        PreferredSize(
-            child: Container(
-                color: Fonts.col_app,
-                child:  ClipRRect(
-                    borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-                    child: Container(
-                        color: Colors.white,
-        child :
-        ListView(children: [
-                Container(
-                  color: Colors.white,
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 8.0),
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 8.0),
-                  child: TextField(
-                    controller: _searchQuery,
-                    decoration: InputDecoration(
-                        counterStyle: TextStyle(color: Colors.white),
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                        ),
-                        hintText: '  Chercher une classe...',
-                        enabledBorder: OutlineInputBorder(
-                          // width: 0.0 produces a thin "hairline" border
-                          borderSide:
-                              BorderSide(color: Fonts.border_col, width: 0.0),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        hintStyle: TextStyle(color: Fonts.col_grey),
-                        suffixIcon: Padding(
-                          padding: const EdgeInsetsDirectional.only(
-                              end: 12.0, start: 12.0),
-                          child: Icon(
-                            Icons.search,
-                            color: Fonts.col_grey,
-                            size: 30.0.r,
-                          ), // icon is 48px widget.
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey[50], width: 0.0),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        filled: true),
+            : ListView(children: [
+          Container(
+            color: Colors.white,
+            margin: const EdgeInsets.symmetric(
+                vertical: 8.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(
+                vertical: 8.0, horizontal: 8.0),
+            child: TextField(
+              controller: _searchQuery,
+              decoration: InputDecoration(
+                  counterStyle: TextStyle(color: Colors.white),
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 6.0,
                   ),
-                ),
+                  hintText: 'Chercher une classe...',
+                  enabledBorder: OutlineInputBorder(
+                    // width: 0.0 produces a thin "hairline" border
+                    borderSide:
+                    BorderSide(color: Fonts.border_col, width: 0.0),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  hintStyle: TextStyle(color: Fonts.col_grey),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        end: 12.0, start: 12.0),
+                    child: Icon(
+                      Icons.search,
+                      color: Fonts.col_grey,
+                      size: 30.0.r,
+                    ), // icon is 48px widget.
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide:
+                    BorderSide(color: Colors.grey[50], width: 0.0),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  filled: true),
+            ),
+          ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: cats
@@ -328,10 +256,8 @@ class _ClassListOneChoiceState extends State<ClassListOneChoice> {
                       .toList(),
                 ),
                 Container(
-                  height: 52,
+                  height: ScreenUtil().setHeight(52),
                 ),
-              ])
-    ))))
-    );
+              ]));
   }
 }

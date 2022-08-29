@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:enamconnect/config/config.dart';
 import 'package:enamconnect/models/user.dart';
 import 'package:enamconnect/services/Fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:enamconnect/config/config.dart';
+
 import 'package:enamconnect/campus/etudiant/releve/Modules.dart';
 import 'package:enamconnect/campus/login/LoginPage.dart';
 import 'package:enamconnect/campus/etudiant/classPackge/Etudiant.dart';
@@ -50,7 +51,7 @@ class _EtudiantHomeState extends State<EtudiantHome> {
       "auth_token": "$token",
     };
     final profileData = await http.post(
-      "${Config.url_api}/profile",
+      "${Config.url_api_scole}/profile",
       body: param,
     );
     setState(() {

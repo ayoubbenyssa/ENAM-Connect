@@ -34,6 +34,7 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:enamconnect/widgets/search_widget.dart';
 import 'package:enamconnect/widgets/widgets.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 
 import 'CutomAppBar2.dart';
@@ -307,18 +308,43 @@ class _BottomNavigationState extends State<BottomNavigation> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: _page != 1
-            ? Padding(
-            padding: EdgeInsets.all(0.w),
-            child: ClipRRect(
+            ? Container(
+              // color: Colors.red,
                 // borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                child: Container(
-                    height: 60.h,
-                    width: 60.w,
-                    // color: Colors.white.withOpacity(0.9),
-                    padding: EdgeInsets.all(0.w),
-                    child: Image.asset(
-                      "assets/images/enam.png",
-                    ))))
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                  Container(
+                      // color: Colors.red,
+                    padding: EdgeInsets.only(left: 30.3.h,bottom: 30.h),
+                    // color: Colors.red,
+                    //   padding: EdgeInsets.all(4),
+                    // margin: EdgeInsets.only(left: 20.w,bottom: 20.h),
+                      child: IconButton(
+                        onPressed: (){
+                          _scaffoldKey.currentState.openDrawer(); // CHANGE THIS LINE
+                        },
+                        icon: SvgPicture.asset(
+                          "images/mn.svg",color: Colors.white ,
+                          // color: Colors.white,
+                          width: 31.77.w,
+                          height: 21.55.h,
+                          fit: BoxFit.fill,
+                        ),
+                      )),
+                    SizedBox(width: 85.w,),
+                    Container(
+                      alignment: Alignment.center,
+                        height: 65.h,
+                        width: 65.w,
+                        // color: Colors.white.withOpacity(0.9),
+                        padding: EdgeInsets.all(0.w),
+                        child: Image.asset(
+                          "assets/images/enam.png",
+                        )),
+                  ],
+                )
+            )
             : SearchWidget(
           widget.user,
           widget.list_partners,
@@ -328,55 +354,62 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         elevation: 0.0,
         titleSpacing: 0,
-        leading: Container(
-          padding: EdgeInsets.only(left: 20.h,bottom: 10.h),
-          // color: Colors.red,
-          //   padding: EdgeInsets.all(4),
-          // margin: EdgeInsets.only(left: 20.w,bottom: 20.h),
-            child: IconButton(
-              onPressed: (){
-                _scaffoldKey.currentState.openDrawer(); // CHANGE THIS LINE
-              },
-              icon: SvgPicture.asset(
-                "images/mn.svg",color: Colors.white ,
-                // color: Colors.white,
-                width: 24.w,
-                fit: BoxFit.cover,
-              ),
-            )),
+        automaticallyImplyLeading: false ,
+        // leading: Container(color: Colors.red,
+        //   padding: EdgeInsets.only(left: 30.h,bottom: 30.h),
+        //   // color: Colors.red,
+        //   //   padding: EdgeInsets.all(4),
+        //   // margin: EdgeInsets.only(left: 20.w,bottom: 20.h),
+        //     child: IconButton(
+        //       onPressed: (){
+        //         _scaffoldKey.currentState.openDrawer(); // CHANGE THIS LINE
+        //       },
+        //       icon: SvgPicture.asset(
+        //         "images/mn.svg",color: Colors.white ,
+        //         // color: Colors.white,
+        //         width: 31.77.w,
+        //         height: 21.55.h,
+        //         fit: BoxFit.fill,
+        //       ),
+        //     )),
         actions: [
           /*searchBar.getSearchAction(context)*/
 
           Padding(
-              padding: EdgeInsets.all(0),
-              child: IconButton(
-                color: Fonts.col_app_fon,
-                icon: new Stack(children: <Widget>[
-                  new SvgPicture.asset("images/Notification.svg",
-                      color: Colors.white,
-                      width: 20.w,
-                      height: 25.h),
-                  new Positioned(
-                    // draw a red marble
-                    top: 0.0,
-                    right: 0.0,
-                    child: not.toString() != "null" && not.toString() != "false"
-                        ? new Icon(Icons.brightness_1,
-                        size: 12.0, color: Colors.redAccent)
-                        : new Container(),
-                  )
-                ]),
-                onPressed: () {
-                  var gMessagesDbRef3 =
-                  FirebaseDatabase.instance.reference().child("notif_new");
-                  gMessagesDbRef3.update({widget.user.auth_id: false});
+              padding: EdgeInsets.only(bottom: 15.h,right: 10.w),
+              child: Row(
+                children: [
+                  IconButton(
+                    color: Fonts.col_app_fon,
+                    icon: new Stack(children: <Widget>[
+                      new SvgPicture.asset("images/Notification.svg",
+                          color: Colors.white,
+                          width: 23.32.w,
+                          height: 30.08.h),
+                      new Positioned(
+                        // draw a red marble
+                        top: 0.0,
+                        right: 0.0,
+                        child: not.toString() != "null" && not.toString() != "false"
+                            ? new Icon(Icons.brightness_1,
+                            size: 12.0, color: Colors.redAccent)
+                            : new Container(),
+                      )
+                    ]),
+                    onPressed: () {
+                      var gMessagesDbRef3 =
+                      FirebaseDatabase.instance.reference().child("notif_new");
+                      gMessagesDbRef3.update({widget.user.auth_id: false});
 
-                  Navigator.push(context,
-                      new MaterialPageRoute(builder: (BuildContext context) {
-                        return new Listusers(widget.user, widget.auth, widget.sign,
-                            widget.list_partners, Reload, widget.analytics);
-                      }));
-                },
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (BuildContext context) {
+                            return new Listusers(widget.user, widget.auth, widget.sign,
+                                widget.list_partners, Reload, widget.analytics);
+                          }));
+                    },
+                  ),
+                  // SizedBox(width: 27.w,)
+                ],
               ))
         ]);
   }
@@ -792,16 +825,26 @@ class _BottomNavigationState extends State<BottomNavigation> {
         },
         child: Scaffold(
           backgroundColor: Colors.white,
-          drawer: new Drawer(
-              child: new Menu(
-                  widget.user,
-                  widget.user.id,
-                  widget.auth,
-                  widget.sign,
-                  lat,
-                  lng,
-                  widget.list_partners,
-                  widget.analytics)),
+            extendBodyBehindAppBar: true,
+          drawer: Theme(
+            data: Theme.of(context).copyWith(
+              // Set the transparency here
+              canvasColor: Colors
+                  .transparent,
+            ),
+            child: new Drawer(
+                elevation: 0.0,
+                child: new Menu(
+                    widget.user,
+                    widget.user.id,
+                    widget.auth,
+                    widget.sign,
+                    lat,
+                    lng,
+                    widget.list_partners,
+                    widget.analytics)
+            ),
+          ),
           appBar: _page == 2 ? PreferredSize(preferredSize : Size.fromHeight(40.h),
               child : ClipPath(
                 clipper: CustomAppBar() ,
@@ -810,83 +853,41 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   color: Colors.red,
                 ),
               )) :
-          PreferredSize(preferredSize : Size.fromHeight(95.h),
-              child : Container(
-                // color: Colors.green,
-                child: Stack(
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          color: Color(0xff78938A),
-                          height: 25.h,
-                        ),
-                        Container(
-                          height: 70.h,
-                          child: Stack(
-                            children: [
-                              // ClipPath(
-                              //   clipper: CustomAppBar() ,
-                              //   // searchBar.build(context),
-                              //   child: Container(
-                              //     color: Color(0xffC8DCC8),
-                              //     // child: searchBar.build(context),
-                              //   ),
-                              // ),
+          PreferredSize(
+            preferredSize : Size.fromHeight(107.h),
+              child : Stack(
+                children: <Widget>[
+                  SvgPicture.asset(
+                    'assets/images/homeee.svg',
+                    fit : BoxFit.cover,
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    // height: 128.h,
+                  ),
 
-                              // ClipPath(
-                              //   clipper: CustomAppBar() ,
-                              //   // searchBar.build(context),
-                              //   child: Column(
-                              //     children: [
-                              //       Container(
-                              //         // color: Color(0xffC8DCC8).withOpacity(0.17),
-                              //         color: Colors.blue,
-                              //         // child: searchBar.build(context),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              ClipPath(
-                                clipper: CustomAppBar() ,
-                                // searchBar.build(context),
-                                child: Container(
-                                  // color: Colors.blue,
-                                  color: Color(0xffC8DCC8).withOpacity(0.17),
-                                  // child: searchBar.build(context),
-                                ),
-                              ),
-                              ClipPath(
-                                clipper: CustomAppBar3() ,
-                                // searchBar.build(context),
-                                child: Container(
-                                  // color: Colors.red,
-                                  color: Color(0xffC8DCC8).withOpacity(0.12),
-                                  // child: searchBar.build(context),
-                                ),
-                              ),
-                              ClipPath(
-                                clipper: CustomAppBar2() ,
-                                // searchBar.build(context),
-                                child: Container(
-                                  color: Color(0xff78938A),
-                                  // child: searchBar.build(context),
-                                ),
-                              ),
 
-                              // searchBar.build(context),
 
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    searchBar.build(context),
+                  // Container(decoration: BoxDecoration(
+                  //   image: DecorationImage(image:  SvgPicture.asset("assets/images/app1.svg"))
+                  // ),),
 
-                  ],
-                ),
-              )
+
+
+
+
+                  searchBar.build(context),
+                  // Container(
+                  //   child: Column(
+                  //     children: <Widget>[Expanded(
+                  //         child: searchBar.build(context),
+                  //
+                  //     )
+                  //     ],
+                  //   ),
+                  // ),
+                ],
+              ),
           ),
           key: _scaffoldKey,
           body: new PageView(

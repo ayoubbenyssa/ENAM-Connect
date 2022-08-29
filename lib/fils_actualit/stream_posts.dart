@@ -261,6 +261,7 @@ class _StreamPotsState extends State<StreamPots> with TickerProviderStateMixin {
   }
 
   st(i) {
+    print("___________________ ${i}");
     setState(() {
       indx = i;
     });
@@ -351,10 +352,10 @@ class _StreamPotsState extends State<StreamPots> with TickerProviderStateMixin {
     }
 
     Widget tbs = Container(
-            height: 40.0.h,
+            height: 45.0.h,
             child: ButtonsTabBar(
               backgroundColor: Fonts.col_app,
-              radius: 42.r,
+              radius: 18.r,
               contentPadding: EdgeInsets.all(6.w),
               borderWidth: 1.0,
               controller: _controller,
@@ -362,9 +363,10 @@ class _StreamPotsState extends State<StreamPots> with TickerProviderStateMixin {
               unselectedBorderColor: Fonts.col_app_fon,
               unselectedBackgroundColor: Colors.white,
               unselectedLabelStyle:
-                  TextStyle(color: Fonts.col_app_fon, fontSize: 14.sp),
+                  TextStyle(color: Fonts.col_app_fon, fontSize: 15.sp  ,fontWeight: FontWeight.bold,fontFamily: "Comfortaa"),
               labelStyle: TextStyle(
-                  fontSize: 14.0.sp,
+                  fontSize: 15.0.sp,
+                  fontFamily: "Comfortaa" ,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
               onPressed: st,
@@ -420,8 +422,9 @@ class _StreamPotsState extends State<StreamPots> with TickerProviderStateMixin {
                 rounded: true,
               )),*/
               // drop_down(),
+              Container(height: 88.h,),
 
-              Container(height: 12.h),
+              // Container(height: 12.h),
               Container(
                   //  height: MediaQuery.of(context).size.height * 0.08,
                   child: isLoading

@@ -56,7 +56,7 @@ class _ListMealsState extends State<ListMeals> {
     };
 
     final mealsData = await http.post(
-      "${Config.url_api}/all_meals_calendar",
+      "${Config.url_api_scole}/all_meals_calendar",
       body: param,
     );
     setState(() {

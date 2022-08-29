@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:enamconnect/models/sector.dart';
 import 'package:enamconnect/models/user.dart';
@@ -10,6 +11,8 @@ import 'package:enamconnect/teeeeest.dart';
 import 'package:enamconnect/widgets/fixdropdown.dart';
 import 'package:enamconnect/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class Conventions extends StatefulWidget {
   Conventions(this.lat, this.lng, this.user, this.list_partner,this.analytics);
@@ -69,16 +72,17 @@ class _ParcState extends State<Conventions>
 
 
   Widget drop_down() => new Container(
-      color: Fonts.col_app,
+      color: Colors.white,
       width: 700.0,
       height: 60.0,
       child: Container(
           margin: const EdgeInsets.all(8.0),
           padding: const EdgeInsets.only(left: 16.0, right: 8.0),
           decoration: new BoxDecoration(
-            color: Fonts.col_app,
-            border: new Border.all(color: Colors.white, width: 1.0),
-            borderRadius: new BorderRadius.circular(2.0),
+
+            color: Colors.white,
+            border: new Border.all(color: Fonts.col_app, width: 1.0),
+            borderRadius: new BorderRadius.all(Radius.circular(22.r)),
           ),
           child: new FixDropDown(
               iconSize: 32.0,
@@ -88,6 +92,7 @@ class _ParcState extends State<Conventions>
                   value: value,
                   child: new Text(
                     value.name.toString(),
+                    style: TextStyle(color: Fonts.col_text),
                     maxLines: 2,
                     softWrap: true,
                   ),
@@ -97,7 +102,7 @@ class _ParcState extends State<Conventions>
                 selectedValue != "" ? selectedValue : "Secteur",
                 maxLines: 1,
                 softWrap: true,
-                style: new TextStyle(color: Colors.white),
+                style: new TextStyle(color: Fonts.col_text),
               ),
               onChanged: (Sector value) {
                 setState(() {
@@ -126,6 +131,12 @@ class _ParcState extends State<Conventions>
       _menuShown = false;
     });
   }
+  Widget bottom_appbar (){
+  return  PreferredSize(
+      preferredSize: new Size.fromHeight(50.h),
+      child:  drop_down(),);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,19 +148,14 @@ class _ParcState extends State<Conventions>
       animationController.reverse();
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Fonts.col_app,
-          iconTheme: IconThemeData(color: Colors.white),
-          elevation: 0.0,
-          title: Text('Conventions',
-          style: TextStyle(
-            color: Colors.white ,
-          ),),
-        ),
+        appBar: PreferredSize(
+            preferredSize: new Size.fromHeight(180.h),
+
+            child: ApBar("assets/images/ABCENCE.svg","images/mic.png" ,"Conventions" , bottom_appbar() )),
         body: Stack(children: <Widget>[
           new Column(
             children: <Widget>[
-              drop_down(),
+              // drop_down(),
               new Expanded(
                   child: loading
                       ? Center(

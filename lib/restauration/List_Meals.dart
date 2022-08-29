@@ -33,7 +33,7 @@ class _MealsState extends State<Meals> {
     };
 
     final restoData = await http.post(
-      "${Config.url_api}/resto_bill",
+      "${Config.url_api_scole}/resto_bill",
       body: param,
     );
     setState(() {
@@ -53,7 +53,7 @@ class _MealsState extends State<Meals> {
     };
 
     final restoData = await http.post(
-      "${Config.url_api}/make_reservation",
+      "${Config.url_api_scole}/make_reservation",
       body: param,
     );
     setState(() {

@@ -3,8 +3,8 @@ class Absence {
    var date;
    var justif;
   final String name;
-  bool more_ditail ;
-  bool afternoon;
+   bool more_ditail ;
+   bool afternoon;
   bool forenoon;
    String schoolYear;
 
@@ -19,7 +19,8 @@ class Absence {
       afternoon : json["afternoon"],
       name: json['name'],
       schoolYear: json['school_year'].toString(),
-        more_ditail : true ,
+      more_ditail : true ,
+
     );
   }
 }

@@ -24,13 +24,13 @@ class CampusServices {
 
 
     // final profileData = await http.get(
-    //   "${Config.url_api}/profile?user_id=${user_id}&student_id=${student_id}&auth_token=${token}",
+    //   "${Config.url_api_scole}/profile?user_id=${user_id}&student_id=${student_id}&auth_token=${token}",
     //   headers: { "Content-type": "application/json" },
     // );
 
 
     final profileData = await http.post(
-      "${Config.url_api}/profile",
+      "${Config.url_api_scole}/profile",
       headers: { "Content-type": "application/json" },
       body: param,
     );
@@ -60,7 +60,7 @@ class CampusServices {
 
 
     final profileData = await http.post(
-      "${Config.url_api}/profile_employee",
+      "${Config.url_api_scole}/profile_employee",
       body: param,
     );
 

@@ -1,3 +1,4 @@
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -130,16 +131,25 @@ class _Publish1State extends State<TitlesScreen> {
               fontSize: ScreenUtil().setSp(12.5),
               fontWeight: FontWeight.w400),
         ));
+    Widget bottom_appbar (){
+      PreferredSize(child: Container(),);
+
+    }
 
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          iconTheme: IconThemeData(color: Colors.white),
-          title: Text(
-            "Rôles",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+
+        appBar: PreferredSize(
+            preferredSize: new Size.fromHeight(128.h),
+
+            child: ApBar("assets/images/ABCENCE.svg","" ,"Rôles" , bottom_appbar() )),
+        // appBar: AppBar(
+        //   elevation: 0.0,
+        //   iconTheme: IconThemeData(color: Colors.white),
+        //   title: Text(
+        //     "Rôles",
+        //     style: TextStyle(color: Colors.white),
+        //   ),
+        // ),
         body: load == true
             ? Center(
                 child: CupertinoActivityIndicator(),

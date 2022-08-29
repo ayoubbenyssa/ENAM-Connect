@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +32,8 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
   List<String> _list;
   bool _IsSearching;
   String _searchText = "";
+  bool affichage = true;
+
 
   getList() async {
     var a = await home_repos.students_list(widget.user, widget.batch_id);
@@ -47,11 +50,17 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
         setState(() {
           _IsSearching = false;
           _searchText = "";
+
+          print("_searchText");
+          print(_searchText);
         });
       } else {
         setState(() {
           _IsSearching = true;
           _searchText = _searchQuery.text;
+
+          print("_searchText");
+          print(_searchText);
         });
       }
     });
@@ -92,19 +101,19 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
   Widget build(BuildContext context) {
     TextStyle text4(e) => TextStyle(
         color: Colors.black,
-        fontSize: e.check == true ? 20 : 16,
+        fontSize: ScreenUtil().setSp(e.check == true ? 16 : 13),
         fontWeight: e.check == true ? FontWeight.w800 : FontWeight.w500);
 
     Widget divid = Container(
       margin: EdgeInsets.only(
-        left: 12,
-        right: 12,
+        left: ScreenUtil().setWidth(12),
+        right: ScreenUtil().setWidth(12),
       ),
       width: MediaQuery.of(context).size.width,
       height: 1,
       color: Fonts.col_grey.withOpacity(0.06),
     );
-    Widget row_widget(Student e, onPressed) => Container(
+    Widget row_widget( Student e , onPressed) => Container(
         color: e.check == true ? Fonts.col_app.withOpacity(0.06) : Colors.white,
         child: InkWell(
           child: Column(children: [
@@ -112,12 +121,12 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
                 padding: EdgeInsets.only(
                   top: 16,
                   bottom: 16,
-                  left: 23,
-                  right: 23,
+                  left: ScreenUtil().setWidth(23),
+                  right: ScreenUtil().setWidth(23),
                 ),
                 child: Row(children: [
                   Container(
-                    width: 12,
+                    width: ScreenUtil().setWidth(12),
                   ),
 
                   Expanded(
@@ -125,15 +134,121 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
                     e.first_name + " " + e.last_name,
                     style: text4(e),
                   )),
-                  SvgPicture.asset("images/next.svg"),
+                  // SvgPicture.asset("images/next.svg"),
+                  Image.asset(
+                    "images/check.png", color: e.check == true ? Fonts.green_app : Fonts.col_grey , fit: BoxFit.cover, width:  e.check ? 23.w : 20.w,
+                  )
                 ])),
             divid
           ]),
           onTap: () {
-            print("******* ${e.first_name} *********** ");
             onPressed(e);
           },
-        ));
+        )
+    );
+
+
+    Widget cart_etud(BuildContext context , int index) =>
+        InkWell(
+          child: Container(
+          // color: cats[index].check == true ? Fonts.col_app.withOpacity(0.06) : Colors.white,
+          height: MediaQuery.of(context).size.width * 0.3.w,
+          decoration: BoxDecoration(
+            color: cats[index].check == true ? Fonts.green_app : Fonts.col_app.withOpacity(0.06),
+            borderRadius: BorderRadius.all(Radius.circular(22.r)),
+            // border: Border(bottom: BorderSide(style: BorderStyle.solid, width: 0.5))
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(22.r)),
+                      border: Border.all(color: Fonts.col_app),
+                    ),
+                    alignment: Alignment.center,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.2.w,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.2.w,
+                    child: new Image.asset(
+                      "images/user.png",
+                      color: Fonts.col_text,
+                      fit: BoxFit.cover,
+                      // width: 25.0,
+                      // height: 25.0,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.h,),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(child: Container()),
+                  Container(
+                    // color: Colors.red,
+                    alignment: Alignment.center,
+
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.25,
+                    child: Text(
+                      "${ cats[index].first_name + " " + cats[index].last_name}",
+                      maxLines: 1,
+                      style: TextStyle(fontWeight: FontWeight.w500,
+                          color: Fonts.col_text,
+                          fontSize: 11.sp),
+                    ),
+                  ),
+                  Expanded(child: Container()),
+
+                ],
+              ),
+
+              // SizedBox(height: 10.h,),
+              //
+              // Row(
+              //
+              //   children: [
+              //     Expanded(child: Container()),
+              //
+              //     Container(
+              //       padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
+              //       decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(50.0),
+              //           color: Fonts.col_app),
+              //       child: (data["student"][index]["nb_abs"] != null &&
+              //           data["student"][index]["nb_abs"] != 0)
+              //           ? Text(
+              //         "${data["student"][index]["nb_abs"]} heures",
+              //         style: TextStyle(fontSize: 15.0, color: Colors.white),
+              //       )
+              //           : Text("100 heures"),
+              //     ),
+              //     Expanded(child: Container()),
+              //
+              //   ],
+              // ),
+            ],
+          ),
+      ),  onTap: () {
+          click_cat(cats[index]);
+        },
+        );
+
+
 
     Widget text(String text) => Container(
         padding: EdgeInsets.only(
@@ -160,7 +275,12 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
               fontWeight: FontWeight.w400),
         ));
 
+    Widget  boton_appbar(){
+      PreferredSize(preferredSize : Size.fromHeight(0.h));
+    }
+
     return Scaffold(
+
         bottomNavigationBar: Container(
             padding: EdgeInsets.only(left: 40, right: 40, bottom: 8, top: 4),
             //height: ScreenUtil().setHeight(66),
@@ -178,7 +298,6 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
               onPressed: () {
                 if (choice_category.first_name != "" &&
                     choice_category.last_name != "") {
-                  print("@@@@@@@@ ${choice_category.first_name}  @@@ ${choice_category.last_name} @@@");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -203,160 +322,250 @@ class _ClassListOneChoiceState extends State<StudentsListOneChoice> {
                   ),
                 ],
               ),
-            )
-        ),
-        appBar: AppBar(
-          elevation: 0.0,
-          titleSpacing: 0.0,
-          toolbarHeight: 60.h ,
-          leading: Container(
-            color: Fonts.col_app,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          title: Container(
-            padding: const EdgeInsets.only(top: 10,bottom:10),
-            color: Fonts.col_app,
-            child: Row(
-              children: [
-                Image.asset(
-                  "images/appointment.png",
-                  color: Colors.white,
-                  width: 23.5.w,
-                  height: 25.5.h,
-                ),
-                Container(width: 7.w,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom:10),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.54.w,
-                    child: Text(
-                      "Étudiants",
-                      maxLines: 2,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.0.sp),
-                    ),
-                  ),
-                ),
-
-                Expanded(child: Container()),
-                Padding(
-                    padding: EdgeInsets.all(8.w),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                        child: Container(
-                            height: 44.w,
-                            width: 44.w,
-                            color: Colors.white.withOpacity(0.9),
-                            padding: EdgeInsets.all(0.w),
-                            child: Image.asset(
-                              "images/enam.png",
-                            )))),
-                SizedBox(width: 22.w,),
-              ],
-
-            ),
-          ),
-        ),
+            )),
+        appBar: PreferredSize(
+            preferredSize : Size.fromHeight(128.h),
+            child: ApBar("assets/images/ABCENCE.svg" ,"images/absences.png", "Étudiants" ,boton_appbar())),
+        // appBar: AppBar(
+        //   // shape: RoundedRectangleBorder(
+        //   //     borderRadius: BorderRadius.vertical(
+        //   //       bottom: Radius.circular(30),
+        //   //     )),
+        //   elevation: 0.0,
+        //   titleSpacing: 0.0,
+        //   toolbarHeight: 70.h ,
+        //   leading: Container(
+        //     // color: Fonts.col_app,
+        //     child: IconButton(
+        //       icon: Icon(
+        //         Icons.arrow_back,
+        //         color: Colors.white,
+        //       ),
+        //       onPressed: () {
+        //         Navigator.pop(context);
+        //       },
+        //     ),
+        //   ),
+        //
+        //   title: Container(
+        //     padding: const EdgeInsets.only(top: 10,bottom:10),
+        //     // color: Fonts.col_app,
+        //     child: Row(
+        //       children: [
+        //
+        //         Padding(
+        //           padding: const EdgeInsets.only(top: 10,bottom:10),
+        //           child: Container(
+        //             // width: MediaQuery.of(context).size.width * 0.54.w,
+        //             child: Text(
+        //               "Étudiants",
+        //               maxLines: 2,
+        //               style: TextStyle(
+        //                   color: Colors.white,
+        //                   fontWeight: FontWeight.w500,
+        //                   fontSize: 16.0.sp),
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //
+        //     ),
+        //   ),
+        // ),
         body: load == true
-            ?
-        PreferredSize(
-            child: Container(
-                color: Fonts.col_app,
-                child:  ClipRRect(
-                    borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-                    child: Container(
-                        color: Colors.white,
-                        child :
-        Center(
+            ? Center(
                 child: CupertinoActivityIndicator(),
               )
-    ))))
             :
-        PreferredSize(
-            child: Container(
-                color: Fonts.col_app,
-                child:  ClipRRect(
-                    borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-                    child: Container(
-                        color: Colors.white,
-                        child :
-        ListView(children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 8.0),
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 8.0),
-                  child: TextField(
-                    controller: _searchQuery,
-                    decoration: InputDecoration(
-                        counterStyle: TextStyle(color: Colors.white),
-                        isDense: true,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                        ),
-                        hintText: '  Chercher un étudiant...',
-                        enabledBorder: OutlineInputBorder(
-                          // width: 0.0 produces a thin "hairline" border
-                          borderSide:
-                              BorderSide(color: Colors.grey[600], width: 0.0),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        hintStyle: TextStyle(color: Colors.grey[600]),
-                        suffixIcon: Padding(
-                          padding: const EdgeInsetsDirectional.only(
-                              end: 12.0, start: 12.0),
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.grey[600],
-                            size: 30.0,
-                          ), // icon is 48px widget.
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.grey[50], width: 0.0),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        filled: true),
+        Column(
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.81.w,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 1.0, horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 8.0),
+                    child: TextField(
+                      controller: _searchQuery,
+                      decoration: InputDecoration(
+                          counterStyle: TextStyle(color: Colors.white),
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 6.0,
+                          ),
+                          hintText: '  Chercher un étudiant...',
+                          enabledBorder: OutlineInputBorder(
+                            // width: 0.0 produces a thin "hairline" border
+                            borderSide:
+                            BorderSide(color: Colors.grey[600], width: 0.0),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey[600]),
+                          suffixIcon: Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                                end: 12.0, start: 12.0),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.grey[600],
+                              size: 30.0,
+                            ), // icon is 48px widget.
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.grey[50], width: 0.0),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          filled: true),
+                    ),
                   ),
-                ),
-                /**
-              (!e.first_name || !e.last_name)
-              .toLowerCase()
-              .contains(_searchText.toLowerCase()) &&
-              _searchText.isNotEmpty)
-              ? new Container()
-              :
-           **/
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: cats
-                      .map((e) => (!e.first_name
-                                      .toLowerCase()
-                                      .contains(_searchText.toLowerCase()) &&
-                                  _searchText.isNotEmpty) ||
-                              (!e.last_name
-                                      .toLowerCase()
-                                      .contains(_searchText.toLowerCase()) &&
-                                  _searchText.isNotEmpty)
-                          ? Container()
-                          : row_widget(e, click_cat))
-                      .toList(),
-                ),
+
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.05.w,
+
+                    child:  InkWell(
+                      child: Container(
+                        child:
+                        affichage ?
+                        SvgPicture.asset(
+
+                          "images/mn.svg",color: Fonts.col_text ,
+                          // color: Colors.white,
+                          width: 24.w,
+                          fit: BoxFit.cover,
+                        )  :
+                        Image.asset(
+                          "images/grid.png",
+                          color: Fonts.col_text ,
+                          fit: BoxFit.cover,
+                          width: 24.w,
+                        )
+
+                        ,),
+                      onTap: (){
+                      setState(() {
+                        affichage = affichage ? false : true ;
+                      });
+                    },
+                    )
+                    ,),
+                ],
+              ),
+            ),
+            /**
+                (!e.first_name || !e.last_name)
+                .toLowerCase()
+                .contains(_searchText.toLowerCase()) &&
+                _searchText.isNotEmpty)
+                ? new Container()
+                :
+             **/
+
+
+                SizedBox(height: 15.sp,),
+
+
                 Container(
-                  height: 52,
-                ),
-              ])
-    ))))
+                  // color: Colors.red,
+                  height:MediaQuery.of(context).size.height * 0.81.h,
+                  child: affichage
+                      ?
+                  Scrollbar(
+                    child: ListView(
+
+                      children:cats.map((e) => (!e.first_name
+                          .toLowerCase()
+                          .contains(_searchText.toLowerCase()) &&
+                          _searchText.isNotEmpty) ||
+                          (!e.last_name
+                              .toLowerCase()
+                              .contains(_searchText.toLowerCase()) &&
+                              _searchText.isNotEmpty)
+                          ? Container()
+                          :
+
+                      row_widget(e, click_cat)).toList(),
+                    ),
+                  )
+                      :
+    Scrollbar(
+    child: GridView.builder(
+      gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 170,
+          // childAspectRatio: 3 / 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10),
+      itemBuilder: cart_etud,
+      itemCount: cats.length,
+    ),
+    )
+
+
+                )
+
+
+
+
+
+          ],
+        )
+
+    //
+    //     ListView(children: [
+    //
+    //           Container(
+    //             height: MediaQuery.of(context).size.height * 0.8.h,
+    //             child: Column(
+    //                 crossAxisAlignment: CrossAxisAlignment.start,
+    //                 children: affichage ?
+    //
+    //                 cats.map((e) => (!e.first_name
+    //                                     .toLowerCase()
+    //                                     .contains(_searchText.toLowerCase()) &&
+    //                                 _searchText.isNotEmpty) ||
+    //                             (!e.last_name
+    //                                     .toLowerCase()
+    //                                     .contains(_searchText.toLowerCase()) &&
+    //                                 _searchText.isNotEmpty)
+    //                         ? Container()
+    //                         :
+    //
+    //                 row_widget(e, click_cat)).toList()
+    //                 :
+    //
+    //         cats.map((e) => (!e.first_name
+    //               .toLowerCase()
+    //               .contains(_searchText.toLowerCase()) &&
+    //               _searchText.isNotEmpty) ||
+    //               (!e.last_name
+    //                   .toLowerCase()
+    //                   .contains(_searchText.toLowerCase()) &&
+    //                   _searchText.isNotEmpty)
+    //               ? Container()
+    //               : Container(
+    //           height: MediaQuery.of(context).size.height * 0.8.h,
+    //
+    //           child: GridView.builder(
+    //             gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
+    //                   maxCrossAxisExtent: 170,
+    //                   // childAspectRatio: 3 / 2,
+    //                   crossAxisSpacing: 10,
+    //                   mainAxisSpacing: 10),
+    //                   itemBuilder: cart_etud,
+    //                   itemCount: cats.length,
+    //         ),
+    //               ),).toList(),
+    //             ),
+    //           ),
+    //
+    //
+    //             Container(
+    //               height: ScreenUtil().setHeight(52),
+    //             ),
+    //           ]
+    // )
     );
   }
 }

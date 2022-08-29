@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enamconnect/config/config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+
 
 import 'package:enamconnect/services/Fonts.dart';
 
@@ -41,7 +43,7 @@ class _NotesState extends State<Notes> {
     };
 
     final batchData = await http.post(
-      "${Config.url_api}/employee_subject_marks",
+      "${Config.url_api_scole}/employee_subject_marks",
       body: param,
     );
     List controllers2 = [];
@@ -51,9 +53,9 @@ class _NotesState extends State<Notes> {
       for (Map<String, dynamic> stud in data["student"]) {
         TextEditingController controller = TextEditingController();
         controller.text =
-            ((stud["mark"] != null) && (stud["mark"].toString() != ''))
-                ? stud["mark"].toString()
-                : '';
+        ((stud["mark"] != null) && (stud["mark"].toString() != ''))
+            ? stud["mark"].toString()
+            : '';
         controllers2.add(controller);
         print(controller.text);
       }
@@ -82,7 +84,7 @@ class _NotesState extends State<Notes> {
     print(json.encode(param));
 
     final batchData = await http.post(
-      "${Config.url_api}/save_scores",
+      "${Config.url_api_scole}/save_scores",
       headers: {
         'Content-Type': 'application/json',
       },
@@ -108,7 +110,7 @@ class _NotesState extends State<Notes> {
     };
 
     final batchData = await http.post(
-      "${Config.url_api}/publish_exam_scores",
+      "${Config.url_api_scole}/publish_exam_scores",
       headers: {
         'Content-Type': 'application/json',
       },
@@ -143,83 +145,69 @@ class _NotesState extends State<Notes> {
 
   Widget _buildNotesItem(BuildContext context, int index) {
     return /*index<data["student"].length ? */ Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.w),
       decoration: BoxDecoration(
-          color: Fonts.col_cl,
-        borderRadius: BorderRadius.all(Radius.circular(25.r)),
-        border: Border.all(
-            color: Fonts.border_col, style: BorderStyle.solid, width: 0.1),
-      ),
+          border:
+          Border(bottom: BorderSide(style: BorderStyle.solid, width: 0.1))),
       child: ListTile(
-        title: Text(
-          "${data["student"][index]["student"]}",
-          style: TextStyle(
-              color: Fonts.col_app_grey,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold),
-        ),
+        title: Text("${data["student"][index]["student"]}", style: TextStyle(fontWeight: FontWeight.normal ,color: Fonts.col_text , fontSize: 14.sp),),
         trailing: Container(
-          width: 70.w,
-          // width: 50.w,
-          // padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(),
-          child: widget.chef_dept == true
-              ? TextFormField(
-                  keyboardType: TextInputType.number,
-                  onChanged: (_) {
-                    setState(() {
-                      _isChanged = true;
-                      print('verdad');
-                      print((controllers[controllers.length - 1].text));
-                    });
-                  },
-                  textAlign: TextAlign.center,
-                  validator: (value) {
-                    // if (double.parse(value)==null && value!="") {
-                    //   return '!!';
-                    // }
-                    // return null;
-                  },
-                  controller: controllers[index],
-                  // focusNode: FocusNode(),
-                  style: TextStyle(fontSize: 15.0.sp,fontWeight: FontWeight.bold, color: Fonts.col_app_fon),
-                  decoration: InputDecoration(border: InputBorder.none),
-                  // keyboardType: TextInputType.multiline,
-                  // maxLines: null,
-                )
-              : IgnorePointer(
-                  child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  onChanged: (_) {
-                    setState(() {
-                      _isChanged = true;
-                      print('verdad');
-                      print((controllers[controllers.length - 1].text));
-                    });
-                  },
-                  textAlign: TextAlign.center,
-                  validator: (value) {
-                    // if (double.parse(value)==null && value!="") {
-                    //   return '!!';
-                    // }
-                    // return null;
-                  },
-                  controller: controllers[index],
-                  // focusNode: FocusNode(),
-                  style: TextStyle(fontSize: 15.0.sp,fontWeight: FontWeight.bold, color: Fonts.col_app_fon),
-                  decoration: InputDecoration(border: InputBorder.none),
-                  // keyboardType: TextInputType.multiline,
-                  // maxLines: null,
-                )),
+          width: 40ss.w,
+          padding: EdgeInsets.all(5),
+          decoration:
+          BoxDecoration(shape: BoxShape.circle, color: Fonts.col_app),
+          child: widget.chef_dept== true?TextFormField(
+            keyboardType: TextInputType.number,
+            onChanged: (_) {
+              setState(() {
+                _isChanged = true;
+                print('verdad');
+                print((controllers[controllers.length - 1].text));
+              });
+            },
+            textAlign: TextAlign.center,
+            validator: (value) {
+              // if (double.parse(value)==null && value!="") {
+              //   return '!!';
+              // }
+              // return null;
+            },
+            controller: controllers[index],
+            // focusNode: FocusNode(),
+            style: TextStyle(fontSize: 14.0.sp, color: Colors.white),
+            decoration: InputDecoration(border: InputBorder.none),
+            // keyboardType: TextInputType.multiline,
+            // maxLines: null,
+          ): IgnorePointer(child:
+          TextFormField(
+            keyboardType: TextInputType.number,
+            onChanged: (_) {
+              setState(() {
+                _isChanged = true;
+                print('verdad');
+                print((controllers[controllers.length - 1].text));
+              });
+            },
+            textAlign: TextAlign.center,
+            validator: (value) {
+              // if (double.parse(value)==null && value!="") {
+              //   return '!!';
+              // }
+              // return null;
+            },
+            controller: controllers[index],
+            // focusNode: FocusNode(),
+            style: TextStyle(fontSize: 14.0.sp, color: Colors.white),
+            decoration: InputDecoration(border: InputBorder.none),
+            // keyboardType: TextInputType.multiline,
+            // maxLines: null,
+          )
+            ),
         ),
       ),
     );
   }
 
   Widget _buildNotesList() {
-    print("resulllltt");
-    print(data["student"]);
-
     Widget timeCards;
     if (data["student"].length > 0) {
       timeCards = Form(
@@ -239,22 +227,22 @@ class _NotesState extends State<Notes> {
   Widget build(BuildContext context) {
     return data != null
         ? Scaffold(
-            bottomNavigationBar: widget.chef_dept == true
-                ? Container(
-                    height: 54,
-                    margin: EdgeInsets.all(12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(width: 12),
-                        Expanded(
-                            child: RaisedButton(
-                          child: Text("Confirmer"),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          color: Colors.grey[50],
-                          /*style: TextButton.styleFrom(
+      bottomNavigationBar:
+      widget.chef_dept == true?
+      Container(
+        height: 54,
+        margin: EdgeInsets.all(12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(width: 12),
+            Expanded(
+                child: RaisedButton(
+                  child: Text("Confirmer"),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  color: Colors.grey[50],
+                  /*style: TextButton.styleFrom(
                   elevation: 1,
                   primary: Colors.white,
                   backgroundColor: !_isChanged ? Colors.grey[300] : Fonts.col_app,
@@ -264,41 +252,34 @@ class _NotesState extends State<Notes> {
                       color: Colors.white
                   )
               ),*/
-                          onPressed: !_isChanged
-                              ? null
-                              : () async {
-                                  print('Form validated');
-                                  for (int i = 0;
-                                      i < data["student"].length;
-                                      i++) {
-                                    //  if ( controllers[i].text != "" ) {
-                                    data["student"][i]["mark"] =
-                                        controllers[i].text;
-                                    // }
-                                  }
+                  onPressed: !_isChanged
+                      ? null
+                      : () async {
+                    print('Form validated');
+                    for (int i = 0; i < data["student"].length; i++) {
+                      //  if ( controllers[i].text != "" ) {
+                      data["student"][i]["mark"] =
+                          controllers[i].text;
+                      // }
+                    }
 
-                                  await putNotes(
-                                      widget._userId,
-                                      widget._employeeId,
-                                      widget._token,
-                                      widget._subjectId,
-                                      data);
-                                },
-                        )),
-                        Container(
-                          width: 12,
-                        ),
-                        Expanded(
-                            child: RaisedButton(
-                          child: Text(
-                            _isPublished ? "Masquer" : "Publier",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          color: Fonts.col_app,
-                          /* style: TextButton.styleFrom(
+                    await putNotes(widget._userId, widget._employeeId,
+                        widget._token, widget._subjectId, data);
+                  },
+                )),
+            Container(
+              width: 12,
+            ),
+            Expanded(
+                child: RaisedButton(
+                  child: Text(
+                    _isPublished ? "Masquer" : "Publier",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  color: Fonts.col_app,
+                  /* style: TextButton.styleFrom(
                 elevation: 1,
                 primary: Colors.white,
                 backgroundColor: Fonts.col_app,
@@ -308,41 +289,39 @@ class _NotesState extends State<Notes> {
                     color: Colors.white
                 ),
               ),*/
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              print('Form validated');
-                              for (int i = 0; i < data["student"].length; i++) {
-                                if (controllers[i].text != '' &&
-                                    controllers[i].text != null)
-                                  data["student"][i]["mark"] =
-                                      controllers[i].text;
-                              }
-                              await putblierMasquer(
-                                  widget._userId,
-                                  widget._employeeId,
-                                  widget._token,
-                                  widget._subjectId);
-                            } else
-                              print('Form not validated');
-                          },
-                        )),
-                        Container(width: 12.w)
-                      ],
-                    ),
-                  )
-                : Container(
-                    height: 1.h,
-                  ),
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  child: Container(color: Colors.white,child: _buildNotesList()),
-                ),
-              ],
-            ),
-          )
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) {
+                      print('Form validated');
+                      for (int i = 0; i < data["student"].length; i++) {
+                        if (controllers[i].text != '' &&
+                            controllers[i].text != null)
+                          data["student"][i]["mark"] =
+                              controllers[i].text;
+                      }
+                      await putblierMasquer(
+                          widget._userId,
+                          widget._employeeId,
+                          widget._token,
+                          widget._subjectId);
+                    } else
+                      print('Form not validated');
+                  },
+                )),
+            Container(width: 12)
+          ],
+        ),
+      )
+          : Container(height: 1,),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: _buildNotesList(),
+          ),
+        ],
+      ),
+    )
         : Center(
-            child: CircularProgressIndicator(),
-          );
+      child: CircularProgressIndicator(),
+    );
   }
 }

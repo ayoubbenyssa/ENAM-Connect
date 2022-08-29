@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:enamconnect/config/config.dart';
 import 'package:enamconnect/services/Fonts.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'dart:convert';
+import 'package:enamconnect/config/config.dart';
+
 
 import 'Notes_Etudiant.dart';
 import 'Notes_Absences.dart';
@@ -32,7 +33,7 @@ class _BatchesPageState extends State<BatchesPage> {
     };
 
     final batchData = await http.post(
-      "${Config.url_api}/employee_batches",
+      "${Config.url_api_scole}/employee_batches",
       body: param,
     );
     setState(() {

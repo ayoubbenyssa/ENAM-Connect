@@ -1,3 +1,4 @@
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,8 @@ import 'package:enamconnect/app/filters_users_bloc/filter_state.dart';
 import 'package:enamconnect/models/user.dart';
 import 'package:enamconnect/networking/user_item.dart';
 import 'package:enamconnect/services/Fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class FilterUsersByNearest extends StatefulWidget {
   FilterUsersByNearest(this.user);
@@ -113,19 +116,29 @@ class _FilterUsersByNearesState extends State<FilterUsersByNearest> {
       }
     }
   }
+  Widget bottom_appbar (){
+    PreferredSize(child: Container(),);
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
-          elevation: 0.0,
-          title: Text(
-            "Près de vous",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+         appBar: PreferredSize(
+    preferredSize: new Size.fromHeight(128.h),
+
+    child: ApBar("assets/images/ABCENCE.svg","" ,"Près de vous" , bottom_appbar() )),
+
+        // AppBar(
+        //   iconTheme: IconThemeData(color: Colors.white),
+        //   elevation: 0.0,
+        //   title: Text(
+        //     "Près de vous",
+        //     style: TextStyle(color: Colors.white),
+        //   ),
+        // ),
         body: service_gps == false
             ? Container(
                 padding: EdgeInsets.all(12),

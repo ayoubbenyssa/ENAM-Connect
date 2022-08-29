@@ -41,7 +41,7 @@ class _ReleveRestaurationState extends State<ReleveRestauration> {
 
 
     final releveData = await http.post(
-      "${Config.url_api}/resto_releve",
+      "${Config.url_api_scole}/resto_releve",
       body: param,
     );
     setState(() {

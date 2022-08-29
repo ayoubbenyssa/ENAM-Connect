@@ -1,14 +1,15 @@
 import 'dart:math';
 
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:enamconnect/campus/etudiant/classPackge/News.dart';
-import 'package:http/http.dart' as http;
 import 'package:enamconnect/config/config.dart';
+import 'package:http/http.dart' as http;
 import 'package:enamconnect/services/Fonts.dart';
-import 'dart:convert';
-import './NewsDetail.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'dart:convert';
+import './NewsDetail.dart';
 
 class NewsPage extends StatefulWidget {
   final int _userId;
@@ -38,15 +39,12 @@ class _NewsPageState extends State<NewsPage> {
     };
 
     final absenceData = await http.post(
-      "${Config.url_api}/news",
+      "${Config.url_api_scole}/news",
       body: param,
     );
     setState(() {
       data = json.decode(absenceData.body);
-      print("news == ${data}");
-
       news = new ListNews.fromJson(data["student"]);
-
       loading = false;
     });
     return absenceData;
@@ -54,24 +52,31 @@ class _NewsPageState extends State<NewsPage> {
 
   Widget _buildNewsItem(BuildContext context, int index) {
     return Card(
-
         clipBehavior: Clip.antiAliasWithSaveLayer,
         semanticContainer: true,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(22.0.r),
-          side: BorderSide(
-            color: Fonts.col_app_fon,
-            width: 1.0.w,
-          ),        ),
-        elevation: 0.0,
-        margin: new EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 6.0.h),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 8.0,
+        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Fonts.col_cl,
+            color: Colors.white70,
+            border: Border(
+              left: BorderSide(
+                  width: 6.0,
+                  color: Color.fromARGB(
+                    //or with fromRGBO with fourth arg as _random.nextDouble(),
+                    _random.nextInt(266),
+                    _random.nextInt(266),
+                    _random.nextInt(266),
+                    _random.nextInt(266),
+                  ).withOpacity(0.9)),
+            ),
           ),
           child: ListTile(
             contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 10.0.h),
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             leading: Container(
               padding: EdgeInsets.only(right: 16.0),
               decoration: new BoxDecoration(
@@ -83,12 +88,12 @@ class _NewsPageState extends State<NewsPage> {
             title: Text(
               news.newToos[index].newToo.title,
               style:
-                  TextStyle(color: Fonts.col_grey, fontWeight: FontWeight.bold,fontSize: 15.sp),
+                  TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
             ),
             trailing: Text(
               "Détail...",
               style: TextStyle(
-                  color: Fonts.col_app,fontWeight: FontWeight.bold,
+                  color: Fonts.col_app,
                   decoration: TextDecoration.underline),
             ),
             subtitle: Row(
@@ -99,10 +104,7 @@ class _NewsPageState extends State<NewsPage> {
                   child: Container(
                   //  padding: EdgeInsets.only(left: 10.0),
                     child: Text(
-                        "Crée le : ${_formatDate(news.newToos[index].newToo.created_at)}",
-                      style:
-                      TextStyle(color: Fonts.col_grey, fontWeight: FontWeight.w500,fontSize: 13.sp),
-                    ),
+                        "Crée le : ${_formatDate(news.newToos[index].newToo.created_at)}"),
                   ),
                 )
               ],
@@ -130,6 +132,9 @@ class _NewsPageState extends State<NewsPage> {
     }
     return moduleItems;
   }
+  Widget  boton_appbar(){
+    PreferredSize(preferredSize : Size.fromHeight(0.h));
+  }
 
   @override
   void initState() {
@@ -140,94 +145,25 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        titleSpacing: 0.0,
-        toolbarHeight: 60.h ,
-        leading: Container(
-          color: Fonts.col_app,
-          child: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        title: Container(
-          padding: const EdgeInsets.only(top: 10,bottom:10),
-          color: Fonts.col_app,
-          child: Row(
-            children: [
-              Image.asset(
-                "images/news.png",
-                color: Colors.white,
-                width: 23.5.w,
-                height: 25.5.h,
-              ),              Container(width: 7.w,),
-              Padding(
-                padding: const EdgeInsets.only(top: 10,bottom:10),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.54.w,
-                  child: Text(
-                    "News",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18.0.sp),
-                  ),
-                ),
-              ),
-
-              Expanded(child: Container()),
-              Padding(
-                  padding: EdgeInsets.all(8.w),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                      child: Container(
-                          height: 44.w,
-                          width: 44.w,
-                          color: Colors.white.withOpacity(0.9),
-                          padding: EdgeInsets.all(0.w),
-                          child: Image.asset(
-                            "images/enam.png",
-                          )))),
-              SizedBox(width: 22.w,),
-            ],
-
-          ),
-        ),
-
-      ),
+        appBar: PreferredSize(
+            preferredSize : Size.fromHeight(128.h),
+            child: ApBar("assets/images/app1.svg" ,"images/nes.png", "News",boton_appbar())),
+      // appBar: AppBar(
+      //   title: Text("News",style:
+      //   TextStyle(color: Colors.white),),
+      //   iconTheme: IconThemeData(color: Colors.white),
+      //
+      // ),
         body: loading
-            ?   Container(
-            color: Fonts.col_app,
-            child: ClipRRect(
-                borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-
-                child: Container(
-                    color: Colors.white,child : Center(child: CircularProgressIndicator()))))
-            :
-        Container(
-            color: Fonts.col_app,
-            child: ClipRRect(
-                borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-
-                child: Container(
-                    color: Colors.white,
-        child : Column(
+            ? Center(child: CircularProgressIndicator())
+            : Column(
           crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 15.h,),
                   Expanded(
                     child: _buildNewsList(),
                   )
                 ],
-              )
-    )))
-    );
+              ));
   }
 
   String _formatDate(String date) {

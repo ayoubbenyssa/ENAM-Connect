@@ -12,8 +12,8 @@ class AppServices {
   static ParseServer parse_s = new ParseServer();
 
   final JsonDecoder _decoder = new JsonDecoder();
-  String urlclasse = "http://217.182.139.190:1344/parse/classes/";
-  String urlParse = "http://217.182.139.190:1344/parse/";
+  String urlclasse = "http://217.182.139.190:1399/parse/classes/";
+  String urlParse = "http://217.182.139.190:1399/parse/";
 
   static hasArabicCharacters(String text) {
     var regex = new RegExp(
@@ -25,17 +25,17 @@ class AppServices {
   paramsparsejson() {
 
     return {
-      "X-Parse-Application-Id": "EAAe32wHSy9jc1LFN3G56",
+      "X-Parse-Application-Id": "Ee1por5wHSy9fjljc1LRt6FN3G5",
       "Content-Type": 'applicaton/json',
-      'X-Parse-Master-Key': 'iavconnect123456789'
+      'X-Parse-Master-Key': 'RT7Qz12dMP4frxPPO786cVJAhzmGhBhKXt9svEacpso0'
     };
   }
 
   paramsparsenojson() {
     return {
 
-      "X-Parse-Application-Id": "EAAe32wHSy9jc1LFN3G56",
-      'X-Parse-Master-Key': 'iavconnect123456789'
+      "X-Parse-Application-Id": "Ee1por5wHSy9fjljc1LRt6FN3G5",
+      'X-Parse-Master-Key': 'RT7Qz12dMP4frxPPO786cVJAhzmGhBhKXt9svEacpso0'
     };
   }
 

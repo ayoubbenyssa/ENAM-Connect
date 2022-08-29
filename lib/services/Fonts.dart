@@ -18,6 +18,13 @@ class Fonts {
   static const Color col_app_red = const Color(0xffFF0000);
   static const Color col_green = const Color(0xff00DD3B);
 
+  static const Color green_app = const Color(0xff59AC7C);
+  static const Color backgrand = const Color(0xffF0E9E3);
+  static const Color col_gr3 = const Color(0xffEDE6DF);
+
+
+
+
 
   static var title2 = new TextStyle(
       color: col_app_grey, fontWeight: FontWeight.w600, fontSize: 19.5.sp);

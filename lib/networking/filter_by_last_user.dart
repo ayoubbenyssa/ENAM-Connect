@@ -1,3 +1,4 @@
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,10 @@ class FilterByLasteUsesr extends StatefulWidget {
 class _FilterByLasteUsesrState extends State<FilterByLasteUsesr> {
   FilterUsersBloc _filteBloc;
 
+  Widget bottom_appbar (){
+    PreferredSize(child: Container(),);
+
+  }
   @override
   void initState() {
     super.initState();
@@ -59,14 +64,10 @@ class _FilterByLasteUsesrState extends State<FilterByLasteUsesr> {
           return Container();
         }
       }),
-      appBar: new AppBar(
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: new Text(
-          "Dernière connexion",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+      appBar: PreferredSize(
+          preferredSize: new Size.fromHeight(128.h),
+
+          child: ApBar("assets/images/ABCENCE.svg","" ,"Dernière connexion" , bottom_appbar() )),
     );
   }
 }

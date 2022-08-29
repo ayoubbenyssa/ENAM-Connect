@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="414" height="108" viewBox="0 0 414 108">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_566" data-name="Rectangle 566" width="414" height="107" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-Plan_de_travail_1">
+      <rect width="414" height="108"/>
+    </clipPath>
+  </defs>
+  <g id="Plan_de_travail_1" data-name="Plan de travail – 1" clip-path="url(#clip-Plan_de_travail_1)">
+    <g id="Groupe_de_masques_2" data-name="Groupe de masques 2" clip-path="url(#clip-path)">
+      <g id="Groupe_8570" data-name="Groupe 8570" transform="translate(-1073.475 183.063)">
+        <path id="Tracé_34781" data-name="Tracé 34781" d="M1042.85-105.095s67.242,78.552,140.183,78.552,111.692-29.573,169.816-29.573,85.479,47.132,135.626,47.132V-183.767H1042.85Z" transform="translate(0 -66.593)" fill="#c8dcc8" opacity="0.121"/>
+        <path id="Tracé_34782" data-name="Tracé 34782" d="M1488.475-122.862s-67.243,96.876-140.185,96.876S1236.6-62.457,1178.475-62.457,1093-4.331,1042.85-4.331V-161.838h445.625Z" transform="translate(10 -82.933)" fill="#c8dcc8" opacity="0.171"/>
+        <path id="Tracé_34783" data-name="Tracé 34783" d="M1042.85-153.921s67.242,75.834,140.183,75.834,111.692-28.549,169.816-28.549,85.479,45.5,135.626,45.5V-184.431H1042.85Z" transform="translate(8.161 25.515) rotate(-3)" fill="#78938a"/>
+      </g>
+    </g>
+  </g>
+</svg>

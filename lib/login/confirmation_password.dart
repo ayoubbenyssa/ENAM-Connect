@@ -120,7 +120,7 @@ class _Confirmation_passwordState extends State<Confirmation_password> {
       final param = {"username": "${_new_password_confirmcontroller.text}"};
 
       final batchData = await http.post(
-        "${Config.url_api}/forgot_password",
+        "${Config.url_api_scole}/forgot_password",
         body: param,
       );
 

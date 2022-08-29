@@ -198,8 +198,8 @@ class _InactiveWidgetState extends State<InactiveWidget> {
               // new Container(height:8.0),
               new Center(
                   child: new Image.asset(
-                    "images/logo_last.png",
-                    width: MediaQuery.of(context).size.width*0.7,
+                    "images/enam.png",
+                    width: MediaQuery.of(context).size.width*0.4,
                   )),
               Container(
                 height: 48.0,

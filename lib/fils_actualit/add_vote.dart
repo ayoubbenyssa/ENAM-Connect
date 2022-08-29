@@ -1,3 +1,4 @@
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:enamconnect/func/parsefunc.dart';
 import 'package:enamconnect/models/user.dart';
@@ -167,6 +168,10 @@ class _AddVoteState extends State<AddVote> {
         : answers_field(txted[i], focuss[i], i + 1);
   });
 
+  Widget bottom_appbar (){
+    PreferredSize(child: Container(),);
+
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -174,13 +179,17 @@ class _AddVoteState extends State<AddVote> {
 
     return Scaffold(
         key: _scaffoldKey,
-        appBar: new AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
-          title: new Text(
-            "Publier un sondage",
-            style: TextStyle(fontSize: 15.sp,color: Colors.white),
-          ),
-          elevation: 0.0,
+        appBar: PreferredSize(
+            preferredSize: new Size.fromHeight(128.h),
+
+            child: ApBar("assets/images/ABCENCE.svg","" ,"Publier un sondage" , bottom_appbar() )),
+        // new AppBar(
+        //   iconTheme: IconThemeData(color: Colors.white),
+        //   title: new Text(
+        //     "Publier un sondage",
+        //     style: TextStyle(fontSize: 15.sp,color: Colors.white),
+        //   ),
+        //   elevation: 0.0,
           // actions: <Widget>[
           //   new InkWell(
           //     onTap: () async {
@@ -227,7 +236,8 @@ class _AddVoteState extends State<AddVote> {
           //     ),
           //   ),
           // ],
-        ),
+        // ),
+        extendBodyBehindAppBar: true,
         backgroundColor: Colors.white,
         body: new Form(
 
@@ -237,15 +247,7 @@ class _AddVoteState extends State<AddVote> {
 
             child: Column(
               children: [
-                Container(
-                    height: 30.h,
-                    color: Fonts.col_app,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-
-                        child: Container(
-                          color: Colors.white,
-                        ))),
+                SizedBox(height: 100.h,),
                 Expanded(
                   child: new ListView(
                       controller: scrollController,

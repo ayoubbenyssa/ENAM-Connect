@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:enamconnect/campus/etudiant/Documents/List_demandes.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:enamconnect/campus/employee/emploiDuTemp/Time_tables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -62,8 +63,8 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   var colo1 = Fonts.col_app;
-  var colo2 = Color(0xffA5A5A5);
-  bool chef_dept = false;
+  var colo2 = Fonts.col_text;
+  bool chef_dept = false ;
 
   /*Future<User> getcurrentuser() async {
     FirebaseUser a = await FirebaseAuth.instance.currentUser();
@@ -114,7 +115,7 @@ class _MenuState extends State<Menu> {
     prefs = await SharedPreferences.getInstance();
 
     final loginData = await http.post(
-      "${Config.url_api}/login",
+      "${Config.url_api_scole}/login",
       body: param,
     );
 
@@ -244,7 +245,7 @@ class _MenuState extends State<Menu> {
   @override
   void initState() {
     super.initState();
-    if (widget.user.role.id != "9UHbnUrotk") verify_login_campus();
+    if (widget.user.role.id != "twAD2BVIbK") verify_login_campus();
   }
 
   campus() async {
@@ -422,7 +423,12 @@ class _MenuState extends State<Menu> {
                           widget.user.user_id,
                           widget.user.student_id,
                           widget.user.token_user)));
-            } else {
+            } else if (text == "gestion des documents ") {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => List_document()));
+            }  else {
               /* Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -444,7 +450,7 @@ class _MenuState extends State<Menu> {
           ),*/
           title: new Text(text,
               style: new TextStyle(
-                  color: colo2, fontFamily: "Hbold", fontSize: 15.sp)),
+                  color: colo2, fontFamily: "Helvetica", fontSize: 15.sp)),
         );
 
     Widget parc = etud_prof != ""
@@ -462,7 +468,7 @@ class _MenuState extends State<Menu> {
             title: new Text("Campus", style: new TextStyle(color: colo2)),
           );
 
-    Widget prof = widget.user.role.id == "NXiGscrffB"
+    Widget prof = widget.user.role.id == "FUl86lV0Z3"
         ? new Container(
             margin: EdgeInsets.all(8.w),
             decoration: new BoxDecoration(
@@ -484,7 +490,7 @@ class _MenuState extends State<Menu> {
                     height: 25.0,
                   ),
                   title: new Text("Espace Professeur ",
-                      style: new TextStyle(color: colo2)),
+                      style: new TextStyle(color: Color(0xff78938A) , fontSize: 15.sp ,fontWeight: FontWeight.bold ,fontFamily: "Helvetica Neue" )),
                 ),
                 children: <Widget>[
                   // lst("images/ab.png", "Notes et Absences", tap, 25.0, 25.0),
@@ -530,8 +536,7 @@ class _MenuState extends State<Menu> {
                   height: 25.0,
                 ),
                 title: new Text("Espace Étudiant",
-                    style: new TextStyle(
-                        color: Fonts.col_app, fontFamily: "Helvetica_neu")),
+                    style: new TextStyle(color: Color(0xff78938A) , fontSize: 15.sp ,fontWeight: FontWeight.bold ,fontFamily: "Helvetica Neue" )),
               ),
               children: <Widget>[
                 /* new ListTile(
@@ -557,6 +562,8 @@ class _MenuState extends State<Menu> {
                 lst("images/nes.png", "News", tap, 20.0, 20.0),
                 lst("images/ab.png", "Absences", tap, 25.0, 25.0),
                 lst("images/calen.png", "Emploi du temps", tap, 20.0, 20.0),
+                lst("images/calen.png", "gestion des documents ", tap, 20.0, 20.0),
+
 
                 ///Étudiant
               ],
@@ -636,7 +643,7 @@ class _MenuState extends State<Menu> {
                   color: colo1, fontSize: 15.sp, fontFamily: "Helvetica_neu")),
         ));
 
-    Widget con = widget.user.role.id == "usspFD3SAw"
+    Widget con = widget.user.role.id == "eFicRVT6Yk"
         ? Container()
         : new Container(
             margin: EdgeInsets.all(8.w),
@@ -829,51 +836,63 @@ class _MenuState extends State<Menu> {
               fontSize: 15.sp)),
     );
 
-    return new ListView(
-      children: [
-        widget.id.toString() == ""
-            ? new Container()
-            : new HeaderMenuDrawer(widget.user),
-        Container(
-          height: 8,
+    return ClipRRect(
+      borderRadius:  BorderRadius.only(bottomRight: Radius.circular(40),topRight: Radius.circular(40)),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color(0xffEBF3EB).withOpacity(1),
+            border: Border.all(
+            color: Color(0xff707070), width: 1
+          )
         ),
-        (loadin &&
-                widget.user.role.id != "9UHbnUrotk" &&
-                widget.user.role.id != "rZWnnQTWIr")
-            ? Center(child: CircularProgressIndicator())
-            : Container(),
-        prof,
-        //widget.user.role == "Étudiant" ? rest : Container(),
-        etudiant,
-        Publication,
-        ev,
-        con,
-        new Container(
-            margin: EdgeInsets.all(8.w),
-            decoration: new BoxDecoration(
-              color: Color(0xffFAFAFA),
-              border: new Border.all(color: Fonts.col_app, width: 1.0),
-              borderRadius: new BorderRadius.circular(38.0.r),
-            ),
-            child: ann),
-        // shop,
 
-        //  share,
-        // pro,
-        new Container(
-            margin: EdgeInsets.all(8.w),
-            decoration: new BoxDecoration(
-              color: Color(0xffFAFAFA),
-              border: new Border.all(color: Fonts.col_app, width: 1.0),
-              borderRadius: new BorderRadius.circular(38.0.r),
+        child: new ListView(
+          children: [
+            widget.id.toString() == ""
+                ? new Container()
+                : new HeaderMenuDrawer(widget.user),
+            Container(
+              height: 8,
             ),
-            child: logout),
-        // Expanded(child: Container()),
-        //  powered,
-        Container(
-          height: 12,
-        )
-      ],
+            (loadin &&
+                    widget.user.role.id != "twAD2BVIbK" &&
+                    widget.user.role.id != "5MzDneecxZ")
+                ? Center(child: CircularProgressIndicator())
+                : Container(),
+            prof,
+            //widget.user.role == "Étudiant" ? rest : Container(),
+            etudiant,
+            Publication,
+            ev,
+            con,
+            new Container(
+                margin: EdgeInsets.all(8.w),
+                decoration: new BoxDecoration(
+                  color: Color(0xffFAFAFA),
+                  border: new Border.all(color: Fonts.col_app, width: 1.0),
+                  borderRadius: new BorderRadius.circular(38.0.r),
+                ),
+                child: ann),
+            // shop,
+
+            //  share,
+            // pro,
+            new Container(
+                margin: EdgeInsets.all(8.w),
+                decoration: new BoxDecoration(
+                  color: Color(0xffFAFAFA),
+                  border: new Border.all(color: Fonts.col_app, width: 1.0),
+                  borderRadius: new BorderRadius.circular(38.0.r),
+                ),
+                child: logout),
+            // Expanded(child: Container()),
+            //  powered,
+            Container(
+              height: 12,
+            )
+          ],
+        ),
+      ),
     );
   }
 }

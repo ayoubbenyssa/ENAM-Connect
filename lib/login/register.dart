@@ -210,7 +210,7 @@ et une vérification de votre position gps et exigé pour valider votre apparten
     print(img);
 
     if (_isChecked.toString() == "false") {
-    } else if (img == "" && widget.infouser.role.id == "9UHbnUrotk") {
+    } else if (img == "" && widget.infouser.role.id == "twAD2BVIbK") {
       setState(() {
         showInSnackBar("S'il vous plait joindre votre diplome");
       });
@@ -527,18 +527,35 @@ et une vérification de votre position gps et exigé pour valider votre apparten
             children: <Widget>[
               Center(
                   child: Image.asset(
-                "assets/images/logo.png",
+                "assets/images/enam.png",
                 height: MediaQuery.of(context).size.height * 0.11,
                 fit: BoxFit.cover,
               )),
               Container(
                 height: 12,
               ),
+              // Center(
+              //     child: Image.asset(
+              //   "assets/images/ifd.png",
+              //   width: 180.w,
+              // )),
               Center(
-                  child: Image.asset(
-                "assets/images/ifd.png",
-                width: 180.w,
-              )),
+                child:
+                Container(child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Text("ENAM ",
+                      style: TextStyle(color: Fonts.col_app  ,fontWeight: FontWeight.bold ,fontSize: 20.sp),),
+                    Text("Connect",
+                      style: TextStyle(color: Fonts.col_app  ,fontWeight: FontWeight.w400 ,fontSize: 20.sp),),
+                  ],
+                ),),
+                //     Image.asset(
+                //   "assets/images/ifd.png",
+                //   width: 180.w,
+                // )
+              ),
               Expanded(
                   child: new Form(
                       key: _formKey,
@@ -568,7 +585,7 @@ et une vérification de votre position gps et exigé pour valider votre apparten
                                 : confirmpassword,
                             new Container(height: 8.0),
 
-                            widget.infouser.role.id == "9UHbnUrotk"
+                            widget.infouser.role.id == "twAD2BVIbK"
                                 ? InkWell(
                                     child: new Container(
                                         height: 46.h,

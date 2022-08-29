@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:enamconnect/config/config.dart';
 import 'package:enamconnect/models/classe.dart';
 import 'package:enamconnect/models/detail.dart';
 import 'package:enamconnect/models/student.dart';
 import 'package:enamconnect/models/user.dart';
+import 'package:enamconnect/config/config.dart';
 
 class Absence_repository {
   get_details_seances(
@@ -18,12 +18,8 @@ class Absence_repository {
       "student_id": "${student.student_id}",
       "batch_id": "${batch_id}"
     };
-    print("------------------");
 
     print(param);
-
-    print("------------------");
-
 
     /**
         "date"
@@ -32,21 +28,13 @@ class Absence_repository {
      */
 
     final profileData = await http.post(
-      "${Config.url_api}/list_ttes_by_day",
+      "${Config.url_api_scole}/list_ttes_by_day",
       body: param,
     );
-    print("param");
-    print(param);
-    print("param");
 
-
-    var data = json.decode(profileData.body);
-    print("@@@@@@@@@@@@@@@@@@@@@@@");
+    var data = json.decode(profileData.body)["result"];
     print(data);
-    print("--------------------");
-
-    // return List<Detail>.from(data.map((i) => Detail.fromMap(i)).toList());
-    return data ;
+    return List<Detail>.from(data.map((i) => Detail.fromMap(i)).toList());
   }
 
   classe_list(User user) async {
@@ -57,7 +45,7 @@ class Absence_repository {
     };
 
     final profileData = await http.post(
-      "${Config.url_api}/list_batches",
+      "${Config.url_api_scole}/list_batches",
       body: param,
     );
 
@@ -77,7 +65,7 @@ class Absence_repository {
     };
 
     final profileData = await http.post(
-      "${Config.url_api}/list_students",
+      "${Config.url_api_scole}/list_students",
       body: param,
     );
 
@@ -90,7 +78,7 @@ class Absence_repository {
   }
 
   /**
-      ${Config.url_api}/add_attendance
+      ${Config.url_api_scole}/add_attendance
       Params :
 
 
@@ -110,12 +98,9 @@ class Absence_repository {
     "batch_id": "${batch_id}",
     "tte_ids": ids
   }*/;
-  print("add_absence");
   print(json.encode(param));
-  print("add_absence -----------------------------------------");
-
     final profileData = await http.post(
-      "${Config.url_api}/add_attendance",
+      "${Config.url_api_scole}/add_attendance",
         headers: {
           "Content-type": "application/json"
         },
@@ -125,43 +110,6 @@ class Absence_repository {
     print(profileData.body);
 
   }
-
-  delete_attendence(id,user_id,employee_id,auth_token,date,student_id,batch_id) async {
-//
-
-    final ids = id/*{
-    "user_id": "${prof.user_id}",
-    "employee_id": "${prof.employee_id}",
-    "auth_token": "${prof.token_user}",
-    "date": date.toString(),
-    "student_id": "${student.student_id}",
-    "batch_id": "${batch_id}",
-    "tte_ids": ids
-  }*/;
-  final  params = {
-    "id":"$ids",
-    "user_id":"$user_id",
-    "employee_id":"$employee_id",
-    "auth_token":"$auth_token",
-    "date":"$date",
-    "student_id":"$student_id",
-    "batch_id":"$batch_id",
-
-  };
-    print("delete_attendence");
-    print(json.encode(params));
-    final profileData = await http.post(
-      "${Config.url_api}/delete_attendance",
-        headers: {
-          "Content-type": "application/json"
-        },
-      body: json.encode(params)
-    );
-print("@@@@@");
-    print(profileData.body);
-
-  }
-
 
 
 }

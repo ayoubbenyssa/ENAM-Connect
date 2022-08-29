@@ -1,3 +1,4 @@
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,11 @@ class FilterByNewUsers extends StatefulWidget {
 class _FilterByNewUsersState extends State<FilterByNewUsers> {
 
   FilterUsersBloc _filteBloc;
+
+  Widget bottom_appbar (){
+    PreferredSize(child: Container(),);
+
+  }
 
   @override
   void initState() {
@@ -57,14 +63,10 @@ class _FilterByNewUsersState extends State<FilterByNewUsers> {
           return Container();
         }
       }),
-      appBar: new AppBar(
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: new Text(
-          "Nouveaux utilisateurs",
-          style: TextStyle(fontSize: 18.0, color: Colors.white),
-        ),
-      ),
+      appBar: PreferredSize(
+          preferredSize: new Size.fromHeight(128.h),
+
+          child: ApBar("assets/images/ABCENCE.svg","" ,"Nouveaux utilisateurs" , bottom_appbar() )),
     );
   }
 }

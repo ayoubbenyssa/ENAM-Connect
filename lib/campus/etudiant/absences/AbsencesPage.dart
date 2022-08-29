@@ -1,11 +1,14 @@
 import 'package:enamconnect/campus/absence_prof/add_absence_form.dart';
 import 'package:enamconnect/campus/etudiant/classPackge/AbsencesList.dart';
+import 'package:enamconnect/widgets/custom_widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:enamconnect/config/config.dart';
 import 'package:enamconnect/models/user.dart';
 import 'dart:convert';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:enamconnect/config/config.dart';
+
 
 import 'package:enamconnect/services/Fonts.dart';
 
@@ -38,10 +41,9 @@ class _AbsencePageState extends State<AbsencePage> {
     };
 
     final absenceData = await http.post(
-      "${Config.url_api}/attendances",
+      "${Config.url_api_scole}/attendances",
       body: param,
     );
-    print("**** ${absenceData.body} ****");
 
     print(absenceData.body);
     setState(() {
@@ -58,7 +60,6 @@ class _AbsencePageState extends State<AbsencePage> {
     getAbcences(widget._userId, widget._studentId, widget._token);
     super.initState();
   }
-
   Widget _buildAbsenceItem(BuildContext context, int index) {
     return Padding(
         padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 7.h),
@@ -74,16 +75,15 @@ class _AbsencePageState extends State<AbsencePage> {
             child: Container(
               decoration: BoxDecoration(
                   color: Fonts.col_cl,
-
                   border: Border.all(color: Fonts.col_app_fon ,width: 0.5.w),
-                borderRadius: BorderRadius.all(Radius.circular(22.r))
+                  borderRadius: BorderRadius.all(Radius.circular(22.r))
               ),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                        // color: Colors.orange[50],
-                      margin: EdgeInsets.only(top: 5.h),
+                      // color: Colors.orange[50],
+                        margin: EdgeInsets.only(top: 5.h),
                         padding: EdgeInsets.symmetric(horizontal: 7.w,vertical: 10.h),
                         child: new Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,23 +99,23 @@ class _AbsencePageState extends State<AbsencePage> {
                                     textAlign: TextAlign.start,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0.sp,
-                                      color: Fonts.col_app_fonn
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0.sp,
+                                        color: Fonts.col_text
                                     ))),
-                            InkWell(child: Container(child: !absences.absences[index].more_ditail ? Icon(Icons.arrow_drop_down ,size: 35.r ,color: Fonts.col_app_fonn,) : Icon(Icons.arrow_drop_up,size: 35.r ,color: Fonts.col_app_fonn,)  ,),
-                            onTap: (){
-                              print("****");
-
-                              setState(() {
+                            InkWell(child: Container(child: !absences.absences[index].more_ditail ? Icon(Icons.arrow_drop_down ,size: 35.r ,color: Fonts.col_app,) : Icon(Icons.arrow_drop_up,size: 35.r ,color: Fonts.col_app_fonn,)  ,),
+                              onTap: (){
                                 print("****");
-                                print( absences.absences[index].more_ditail );
-                                absences.absences[index].more_ditail = absences.absences[index].more_ditail ? false : true ;
-                                print( absences.absences[index].more_ditail );
+
+                                setState(() {
+                                  print("****");
+                                  print( absences.absences[index].more_ditail );
+                                  absences.absences[index].more_ditail = absences.absences[index].more_ditail ? false : true ;
+                                  print( absences.absences[index].more_ditail );
 
 
-                              });
-                            },
+                                });
+                              },
                             )
                           ],
                         )
@@ -136,29 +136,29 @@ class _AbsencePageState extends State<AbsencePage> {
 
                           Container(
                             child:
-                          Row(children: [
-                            // Container(child: Text("Période :",
-                            //   style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
-                            // ),),
-                            // Container(child: Text("Matinée",
-                            //   style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
-                            // ),),
+                            Row(children: [
+                              // Container(child: Text("Période :",
+                              //   style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
+                              // ),),
+                              // Container(child: Text("Matinée",
+                              //   style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
+                              // ),),
 
-                          ],),
+                            ],),
                           ),
                           Expanded(child: Container()),
                           Container(
                             child:
-                          Row(children: [
-                            Container(child: Text("Date :",
-                              style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
-                            ),),
-                            Container(child: Text("${_formatDate(absences.absences[index].date)}",
-                              style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
-                            ),)
+                            Row(children: [
+                              Container(child: Text("Date" + " :",
+                                style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_text),
+                              ),),
+                              Container(child: Text("${_formatDate(absences.absences[index].date)}",
+                                style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_text),
+                              ),)
 
-                          ],
-                          ),
+                            ],
+                            ),
                           ),
                           SizedBox(width: 15.w,),
 
@@ -171,36 +171,36 @@ class _AbsencePageState extends State<AbsencePage> {
 
                       child: Row(
                         children: <Widget>[
-                       Container(child: Row(
-                         children: [
-                           SizedBox(width: 15.w,),
+                          Container(child: Row(
+                            children: [
+                              SizedBox(width: 15.w,),
 
-                           Container(
-                             child: Image.asset("images/hour.png",
-                                 width: 18.0.w, height: 18.0.h,color: Fonts.col_app_grey,),
-                           ),
-                           SizedBox(width: 4.w,),
+                              Container(
+                                child: Image.asset("images/hour.png",
+                                  width: 18.0.w, height: 18.0.h,color: Fonts.col_app,),
+                              ),
+                              SizedBox(width: 4.w,),
 
-                           Container(
-                             child: Text(
-                               "${absences.absences[index].nbh} ${nbrHeures(absences.absences[index].nbh)}",
-                               style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
-                             ),
-                           ),
+                              Container(
+                                child: Text(
+                                  "${absences.absences[index].nbh} " + "${nbrHeures(absences.absences[index].nbh)}",
+                                  style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.bold,color: Fonts.col_app_grey),
+                                ),
+                              ),
 
-                         ],
-                       ),
-                       ),
+                            ],
+                          ),
+                          ),
                           Expanded(child: Container()),
                           Container(
                             decoration: BoxDecoration(
-                              color: (absences.absences[index].justif == "null" || absences.absences[index].justif == null) ? Colors.white : Fonts.col_app_fonn,
-                              borderRadius: BorderRadius.all(Radius.circular(14.r)),
-                              border: Border.all(color: Fonts.col_app_fon,width: 0.5)
+                                color: (absences.absences[index].justif == "null" || absences.absences[index].justif == null) ? Colors.white : Fonts.col_app_fonn,
+                                borderRadius: BorderRadius.all(Radius.circular(14.r)),
+                                border: Border.all(color: Fonts.col_app_fon,width: 0.5)
                             ),
                             padding: EdgeInsets.symmetric(horizontal: 7.w,vertical: 5.h),
-                            child: Text((absences.absences[index].justif == "null" || absences.absences[index].justif == null) ?"Non - Justifié " : "Justifié " ,
-                              style: TextStyle(color: Fonts.col_app_fonn ,fontSize: 12.sp,fontWeight: FontWeight.w500),),
+                            child: Text((absences.absences[index].justif == "null" || absences.absences[index].justif == null) ?"Non - Justifié " : "Justifié" ,
+                              style: TextStyle(color: (absences.absences[index].justif == "null" || absences.absences[index].justif == null) ? Fonts.col_app_red : Fonts.col_app_grey ,fontSize: 12.sp,fontWeight: FontWeight.w500),),
                           ),
                           SizedBox(width: 15.w,),
 
@@ -355,6 +355,11 @@ class _AbsencePageState extends State<AbsencePage> {
         ));
   }
 
+  Widget  boton_appbar(){
+    PreferredSize(preferredSize : Size.fromHeight(0.h));
+  }
+
+
   Widget _buildAbsneceList() {
     Widget productCards;
     if (absences.absences.length > 0) {
@@ -373,81 +378,84 @@ class _AbsencePageState extends State<AbsencePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true ,
 
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
+      appBar: PreferredSize(
+          preferredSize : Size.fromHeight(128.h),
+          child: ApBar("assets/images/ABCENCE.svg" ,"images/absences.png", "Absences",boton_appbar())),
 
-          elevation: 0.0,
-          titleSpacing: 0.0,
-          toolbarHeight: 60.h ,
-          leading: Container(
-            color: Fonts.col_app,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          title: Container(
-            padding: const EdgeInsets.only(top: 10,bottom:10),
-            color: Fonts.col_app,
-            child: Row(
-              children: [
-                Image.asset(
-                  "images/absences.png",
-                  color: Colors.white,
-                  width: 23.5.w,
-                  height: 25.5.h,
-                ),
-                Container(width: 7.w,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom:10),
-                  child: Text(
-                    "Absences",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18.0.sp),
-                  ),
-                ),
-
-                Expanded(child: Container()),
-                Padding(
-                    padding: EdgeInsets.all(8.w),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                        child: Container(
-                            height: 44.w,
-                            width: 44.w,
-                            color: Colors.white.withOpacity(0.9),
-                            padding: EdgeInsets.all(0.w),
-                            child: Image.asset(
-                              "images/enam.png",
-                            )))),
-                SizedBox(width: 22.w,),
-              ],
-
-            ),
-          ),
-
-        ),
-        body: Container(
-          color: Fonts.col_app,
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(topRight : Radius.circular(39.r)),
-
-            child: Container(
+      // appBar: AppBar(
+      //   iconTheme: IconThemeData(color: Colors.white),
+      //
+      //   elevation: 0.0,
+      //   titleSpacing: 0.0,
+      //   toolbarHeight: 70.h ,
+      //   leading: Container(
+      //     color: Fonts.col_app,
+      //     child: IconButton(
+      //       icon: Icon(
+      //         Icons.arrow_back,
+      //         color: Colors.white,
+      //       ),
+      //       onPressed: () {
+      //         Navigator.pop(context);
+      //       },
+      //     ),
+      //   ),
+      //   backgroundColor: Fonts.col_app,
+      //   title: Container(
+      //     padding: const EdgeInsets.only(top: 10,bottom:10),
+      //     color: Fonts.col_app,
+      //     child: Row(
+      //       children: [
+      //         Image.asset(
+      //           "images/abss.png",
+      //           color: Colors.white,
+      //           width: 30.w,
+      //           height: 35.h,
+      //         ),
+      //         Container(width: 7.w,),
+      //         Padding(
+      //           padding: const EdgeInsets.only(top: 10,bottom:10),
+      //           child: Text(
+      //             "Absences",
+      //             style: TextStyle(
+      //                 color: Colors.white,
+      //                 fontWeight: FontWeight.bold,
+      //                 fontSize: 18.0.sp),
+      //           ),
+      //         ),
+      //
+      //         Expanded(child: Container()),
+      //         Padding(
+      //             padding: EdgeInsets.all(8.w),
+      //             child: ClipRRect(
+      //                 child: Container(
+      //                     height: 44.w,
+      //                     width: 44.w,
+      //                     color: Colors.white.withOpacity(0.9),
+      //                     padding: EdgeInsets.all(0.w),
+      //                     child: Image.asset(
+      //                       "images/enam.png",
+      //                     )))),
+      //         SizedBox(width: 22.w,),
+      //       ],
+      //
+      //     ),
+      //   ),
+      //
+      // ),
+      body: Container(
+        color: Fonts.col_cl,
+        child: ClipRRect(
+          child: Container(
               color: Colors.white,
               child :
-                loading
-                    ? Center(child: CircularProgressIndicator())
-                    : _buildAbsneceList()),
-          ),
+              loading
+                  ? Center(child: CircularProgressIndicator())
+                  : _buildAbsneceList()),
         ),
+      ),
     );
   }
 

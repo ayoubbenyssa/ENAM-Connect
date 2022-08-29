@@ -75,18 +75,20 @@ class _SliderBannerState extends State<SliderBanner2> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          height: 12.h,
+          height: 26.h,
         ),
         CarouselSlider(
+
           options: CarouselOptions(
-            height: 140.0.h,
+
+            height: 220.0.h,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 10),
             autoPlayAnimationDuration: Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
 
             pauseAutoPlayOnTouch: true,
-            aspectRatio: 2.0,
+            aspectRatio: 0.0,
             onPageChanged: (index, reason) {
               setState(() {
                 _currentIndex = index;
@@ -138,8 +140,10 @@ class Item1 extends StatelessWidget {
           click();
         },
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(12.0.r),
+            borderRadius: BorderRadius.circular(28.0.r),
             child: Container(
+              height: 150.h,
+              width: 200.w,
               //  decoration: Widgets.boxdecoration_container3(),
               decoration: BoxDecoration(
                 // image: new DecorationImage(
@@ -148,42 +152,28 @@ class Item1 extends StatelessWidget {
                 //     alignment: Alignment.topRight,
                 //    /* colorFilter: new ColorFilter.mode(
                 //         Colors.transparent, BlendMode.dstATop),*/
-                //     image: new AssetImage("assets/images/logo2.png")),
+                //     image: ew AssetImage("assets/images/logo2.png")),
                 border: new Border.all(
                     color: Fonts.border_col.withOpacity(0.5), width: 1.0),
-                boxShadow: [
-                  BoxShadow(
-                      color: Fonts.col_grey.withOpacity(0.3), blurRadius: 4.0)
-                ],
                 color: Color(0xff92BA92) ,
-                // gradient: LinearGradient(
-                //     begin: Alignment.topLeft,
-                //     end: Alignment.bottomRight,
-                //     stops: [
-                //       0.3,
-                //       1
-                //     ],
-                //     colors: [
-                //       Color(0xff78938A),
-                //       Color(0xff92BA92).withOpacity(0.44),
-                //     ]),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(width: 24.w),
+                  Container(height : 15.w),
 
                   SvgPicture.asset(
                     image,
-                    width: 60.w,
+                    width: 116.21.w,
+                    height: 79.15.h,
                     color: Colors.white, /*,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold)*/
                   ),
-                  Container(width: 28.h),
+                  Container(height: 20.h),
                   Container(
                       //  width: 120.w,
                       child: Text(text,
@@ -191,8 +181,8 @@ class Item1 extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               height: 1.2,
-                              fontSize: 19.0.sp,
-                              fontWeight: FontWeight.w500))),
+                              fontSize: 21.0.sp,
+                              fontWeight: FontWeight.bold))),
                 ],
               ),
             )));

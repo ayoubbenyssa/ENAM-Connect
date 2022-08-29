@@ -331,7 +331,7 @@ class _LoginState extends State<Login1> {
     prefs = await SharedPreferences.getInstance();
 //http://ifd-erp.tk http://ifd-erp.tk
     final loginData = await http.post(
-      "${Config.url_api}/login",
+      "${Config.url_api_scole}/login",
       body: param,
     );
 

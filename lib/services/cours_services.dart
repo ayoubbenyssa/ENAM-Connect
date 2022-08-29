@@ -16,7 +16,7 @@ class ServicesCours {
     print(token);
 
     final response = await http.post(
-      "${Config.url_api}/online_meeting_rooms",
+      "${Config.url_api_scole}/online_meeting_rooms",
       body: param,
     );
 

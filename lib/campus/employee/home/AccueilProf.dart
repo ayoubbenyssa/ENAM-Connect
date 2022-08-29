@@ -4,8 +4,9 @@ import 'package:enamconnect/campus//login/LoginPage.dart';
 import 'package:enamconnect/campus/employee/emploiDuTemp/Time_tables.dart';
 import 'package:enamconnect/campus/employee/notes_absence/Batch_List.dart';
 import 'package:http/http.dart' as http;
-import 'package:enamconnect/config/config.dart';
 import 'dart:convert';
+import 'package:enamconnect/config/config.dart';
+
 
 import 'package:enamconnect/services/Fonts.dart';
 
@@ -54,7 +55,7 @@ class _ProfHomeState extends State<ProfHome> {
     };
 
     final profileData = await http.post(
-      "${Config.url_api}/profile_employee",
+      "${Config.url_api_scole}/profile_employee",
       body: param,
     );
     setState(() {

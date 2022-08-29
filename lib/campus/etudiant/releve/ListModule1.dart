@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:enamconnect/campus/etudiant/classPackge/ListMarques.dart';
-import 'package:enamconnect/config/config.dart';
 import 'package:enamconnect/services/Fonts.dart';
 import 'DetailPage1.dart';
+import 'package:enamconnect/config/config.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 
 class ListModule extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ListModuleState extends State<ListModule> {
 
     print(widget._semestre);
     print("-----****************");
-    var data = await http.post("${Config.url_api}/releve", body: param);
+    var data = await http.post("${Config.url_api_scole}/releve", body: param);
 
     print(data.body);
 
@@ -60,12 +61,13 @@ class _ListModuleState extends State<ListModule> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0.r),
         ),
-        elevation: 1.0,
+        elevation: 0.0,
         color: Colors.white,
         margin: new EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 6.0.h),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10.r)),
+            border: Border.all(color: Fonts.col_app),
             color: Fonts.col_cl,
           ),
           child: ListTile(
@@ -90,14 +92,14 @@ class _ListModuleState extends State<ListModule> {
                         child:
                         Text(
                           marques.marques[index].modules[0].name,
-                          style: TextStyle(color: Fonts.col_app_fon, fontWeight: FontWeight.bold,fontSize: 15.sp),
+                          style: TextStyle(color: Fonts.col_text, fontWeight: FontWeight.bold,fontSize: 18.sp),
                         ),
                       ),
 
                       // Expanded(child: Container()),
 
                       Icon(Icons.arrow_right,
-                          color: Fonts.col_app_fonn, size: 40.0.r),
+                          color: Fonts.col_app, size: 40.0.r),
                     ],
                   ),
                   Row(
@@ -110,23 +112,22 @@ class _ListModuleState extends State<ListModule> {
                               .width * 0.77.w,
                           padding: EdgeInsets.only(top: 4.0.h),
                           child: Text(
-                            "La moyenne générale : ${marques.marques[index]
+                            "La moyenne générale" + ": ${marques.marques[index]
                                 .modules[0].haverage == "NC" ? "NC" : format(
                                 double.parse(marques.marques[index].modules[0]
                                     .haverage))
                             }",
                             style: TextStyle(
-                                color:
-                                    double.parse(marques.marques[index].modules[0]
-                                        .haverage) < 10 ? Fonts.col_app_red : Fonts.col_green ,
+                                color: double.parse(marques.marques[index].modules[0].haverage) < 10 || double.parse(marques.marques[index].modules[0].haverage)  == null ? Fonts.col_app_red : Fonts.col_green ,
 
-                                fontWeight: FontWeight.w500,fontSize: 16.sp),
+                                fontWeight: FontWeight.bold,fontSize: 16.sp),
 
 
                           )),
                       // Expanded(child: Container()),
 
-                      Container(alignment: Alignment.centerRight, child: validation(marques.marques[index].modules[0].decision))
+                      Container(alignment: Alignment.centerRight, child: validation(double.parse(marques.marques[index].modules[0]
+                          .haverage),marques.marques[index].modules[0].decision))
 
 
                     ],
@@ -156,12 +157,9 @@ class _ListModuleState extends State<ListModule> {
     print(marques.marques.length);
 
     if (marques.marques.length > 0) {
-      moduleItems = Container(
-        color: Colors.white,
-        child: ListView.builder(
-          itemBuilder: _buildModuleItem,
-          itemCount: marques.marques.length,
-        ),
+      moduleItems = ListView.builder(
+        itemBuilder: _buildModuleItem,
+        itemCount: marques.marques.length,
       );
     } else {
       /*
@@ -196,15 +194,16 @@ class _ListModuleState extends State<ListModule> {
         ));
   }
 
-  Widget validation(decision) {
-      return Container(
-        width: 33.w,height: 33.h,
-        decoration: BoxDecoration(
-          border: Border.all(color: Fonts.col_app_fonn , width: 1.w),
-          borderRadius: BorderRadius.all(Radius.circular(10.r))
-        ),
-        child: Center(child: Text(decision,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,color: Fonts.col_app_fonn),)),
-      );
+  Widget validation(note,decision) {
+    return Container(
+      width: 33.w,height: 33.h,
+      decoration: BoxDecoration(
+        border: Border.all(color: note > 10 ? Fonts.green_app : Fonts.col_app_red , width: 1.w),
+        borderRadius: BorderRadius.all(Radius.circular(10.r)),
+        // color: note > 10 ? Fonts.green_app : Fonts.col_app_red ,
+      ),
+      child: Center(child: Text(decision,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp ,color: note > 10 ? Fonts.green_app : Fonts.col_app_red ,),)),
+    );
   }
 
   String format(double n) {

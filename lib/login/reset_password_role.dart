@@ -112,7 +112,7 @@ class _Reset_PasswordState extends State<Reset_PasswordRole> {
       final param = {"username": "${_emailcontroller.text}"};
 
       final batchData = await http.post(
-        "${Config.url_api}/forgot_password",
+        "${Config.url_api_scole}/forgot_password",
         body: param,
       );
 
